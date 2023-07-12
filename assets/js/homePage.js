@@ -2,22 +2,21 @@ $(function(){
 var btnSubmitEl = $(".btnSubmit");
 var btnFindAHouseEl = $(".btnFindAHouse");
 
-function pageRedirect() {
-var yourHouseEl = document.createElement('a');
-yourHouseEl.setAttribute('href', './secondPage.html');
-btnSubmitEl.appendchild(yourHouseEl);
-
-}
-
-// function formFindAHouseHandler(){
-
-
-
-
+function formSubmitHandler(event) {
+  event.preventDefault();
+ 
+  }
   
+  
+  function formFindAHouseHandler(event){
+    event.preventDefault();
 
-
-
-$(btnSubmitEl).on("click", pageRedirect); 
-// $(btnFindAHouseEl).on("click", formFindAHouseHandler);  
+  }
+  
+    
+  
+  
+  
+  $(btnSubmitEl).on("click", formSubmitHandler); 
+  $(btnFindAHouseEl).on("click", formFindAHouseHandler);  
 });
