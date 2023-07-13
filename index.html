@@ -18,48 +18,79 @@
 
 <body>
 
-  <header class="">
+  <header class="top-header py-5 has-text-centered has-background-info is-size-3 title">
     <H3>How many Bitcoin is your house worth?</H3>
 
   </header>
 
   <main>
+
+    <h2 class="subtitle is-size-15 has-text-centered is-4">Input an address below</h2>
+
+
+
+
     <!--Search by address is below-->
-    <div id="address-search-container" class="user-input-container">
-      <h4>Input an address below</h4>
+    <div id="address-search-container" class="user-input-container has-text-centered">
+      <div class="section input-box">
+
+        <div class="columns">
+     
+      <div class="column is-size-6-desktop is-size-6-tablet">
       <form id="address-input-form">
         <!--Street Adress Input -->
-        <label class="input-label" for="street-address">Street Address</label>
-        <input name="street-address" id="street-address" type="text" class="form-input-large" />
+      <div class="py-2 has-text-centered">
+        <label class="input-label" for="street-address">Street Address:</label>
+        <input name="street-address" id="street-address" type="text" class="text-input form-input-large" />
+      </div>
         <!--Apt Number Input-->
-        <label class="input-label" for="Apt">Apt</label>
-        <input name="apt-number" id="apt-number" type="text" class="form-input-short" />
+      <div class="py-2 has-text-centered">
+        <label class="input-label" for="Apt">Apt:</label>
+        <input name="apt-number" id="apt-number" type="text" class="text-input form-input-short" />
+      </div>
         <!--City Input-->
-        <label class="input-label" for="city-address">City</label>
-        <input name="city-address" id="city-address" type="text" class="form-input-med" />
+      <div class="py-2 has-text-centered">
+        <label class="input-label" for="city-address">City:</label>
+        <input name="city-address" id="city-address" type="text" class="text-input form-input-med" />
+      </div>
         <!--State Input-->
+      <div class="py-2 has-text-centered">
         <div class="input-group" id="state-address">
-          <label class="input-label" for="state-address">State</label>
-          <select id="state-select"> </select>
+          <label class="input-label" for="state-address">State:</label>
+          <select id="state-select" class="text-input"> </select>
         </div>
+      </div>
 
 
         <!--Zipcode Input-->
-        <label class="input-label" for="zip-address">Zip Code</label>
-        <input name="zip-address" id="zip-address" type="text" class="form-input-short" />
+      <div class="py-2 has-text-centered">
+        <label class="input-label" for="zip-address">Zip Code:</label>
+        <input name="zip-address" id="zip-address" type="text" class="text-input form-input-short" />
+      </div>
+
         <!--Submit Button-->
-        <button type="submit" class="btn btnSubmit">
+      <div class="py-2 has-text-centered">
+        <button type="submit" class="btnSubmit">
           <a href="./secondPage.html" class="btn btn-primary">
             Submit
           </a>
         </button>
+      </div>
       </form>
 
+    </div>
+
+    </div>
+
+    <div class="column is-size-6-desktop is-size-6-tablet">
       <!--Empty div container for historic searchs-->
       <div id="previous-search-container" class="historic-container">
       </div>
+    </div>
 
     </div>
+
+  </div> 
 
     <!--Random return based on bitcoin value below-->
     <div id="random-search-container" class="user-input-container">
