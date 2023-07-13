@@ -19,45 +19,76 @@
 
     <body>
 
-        <header class="">
-            <H3>How many Bitcoin is your house worth?</H3>
+        <header class="top-header py-5">
+            <H1 class="is-size-3 title has-text-centered has-background-info py-5"->How many Bitcoin is your house worth?</H1>
 
         </header>
 
         <main>
 
+            <h2 class="is-size-4 subtitle has-text-centered py-4">Input an address below...</h2>
+
+    <div class="columns">
+
         <!--Search by address is below-->
+        <div class="column is-6">
         <div id="address-search-container" class="user-input-container">
-            <h4>Input an address below</h4>
+           
+            <div class="section">
             <form id="address-input-form">
                 <!--Street Adress Input -->
+                <div class="py-2 has-text-centered">
                 <label class="input-label" for="street-address">Street Address</label>
-                <input name="street-address" id="street-address" type="text"
-                class="form-input-large"/>
+                <input name="street-address" id="street-address" type="text" class="form-input-large"/>
+                </div>
+                <div class="py-2 has-text-centered">
                 <!--Apt Number Input-->
                 <label class="input-label" for="Apt">Apt</label>
                 <input name="apt-number" id="apt-number" type="text" class="form-input-short"/>
+                </div>
                 <!--City Input-->
+                <div class="py-2 has-text-centered">
                 <label class="input-label" for="city-address">City</label>
                 <input name="city-address" id="city-address" type="text" class="form-input-med"/>
+                </div>
+                <div class="py-2 has-text-centered">
                 <!--State Input-->
                 <label class="input-label" for="state-address">State</label>
                 <input name="state-address" id="state-address" type="text" class="form-input-short"/>
+                </div>
+                <div class="py-2 has-text-centered">
                 <!--Zipcode Input-->
                 <label class="input-label" for="zip-address">Zip Code</label>
-                <input name="zip-address" id="zip-address" type="text" class="form-input-short"/>   
+                <input name="zip-address" id="zip-address" type="text" class="form-input-short"/>  
+                </div> 
+                <div class="py-2 has-text-centered">
                 <!--Submit Button-->
-                <button type="submit" class="btn">Submit</button>
+                <div class="py-2 mt-4 has-text-centered">
+                <button type="submit" class="btn" id="address-submit">Submit</button>
+                </div>
             </form>
+        </div>
+        </div>
 
             <!--Empty div container for historic searchs-->
+        <div class="column is-6 has-text-centered">
             <div id="previous-search-container" class="historic-container">
+
+                <div class="section">
+                    <p>hello</p>
+
+                </div>
+
             </div>
+        </div>
 
         </div>
 
+    </div>
+
         <!--Random return based on bitcoin value below-->
-        <div id="random-search-container" class="user-input-container">
+        <div class="section">
+        <div id="random-search-container" class="user-input-container section">
             <H4>I have <input name="bitcoin-input" id="bitcoin-input" type="number" class="form-input-xshort"> Bitcoin, show me a house I can buy.</H4>
             <p>Optional Inputs</p>
             <!--City input for random return-->
@@ -70,7 +101,7 @@
             <!--Submit Button for random return-->
             <button type="submit" class="btn">Find a house!</button>
         </div>
-
+    </div>
         </main>
 
         <footer>
