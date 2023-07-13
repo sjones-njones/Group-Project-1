@@ -21,4 +21,15 @@ console.log(data);
 });
 
 
+fetch ('https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=santa%20monica%2C%20ca&home_type=Houses', {
+headers: {'X-RapidAPI-Key': '0e88e3b544msh53627318f7da7a0p18e841jsn5dd8f250f5f6',
+'X-RapidAPI-Host': 'zillow-com1.p.rapidapi.com'}
+})
+.then(function(response) {
+  return response.json()
+})
+.then(function(data) {
+console.log(data);
+});
+
 
