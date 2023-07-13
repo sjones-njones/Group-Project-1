@@ -33,6 +33,16 @@ $(function () {
     useAddress(addressEl);
   }
 
+  var randomSubmitHandler = function (event) {
+    event.preventDefault();
+    var ranCityEl = $("#city-random").val().trim()
+    var ranStateEl = $("#random-select").val().trim()
+
+    var ranAddressEl = ranCityEl + " " + ranStateEl
+
+    useAddress(ranAddressEl);
+  }
+
   // uses user address to get zpid
   function useAddress(addressEl) {
     fetch('https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=' + addressEl + '&home_type=Houses', {
