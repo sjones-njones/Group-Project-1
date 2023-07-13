@@ -37,7 +37,7 @@
   }
   
   p {
-    font-size: 15px;
+    font-size: 18px;
     font-family:Arial, Helvetica, sans-serif ;
   }
   
@@ -60,11 +60,23 @@
     background-color: var(--tertiary);
   }
 
+  .form-input-large{
+    width: 320px;
+  }
+
+  .form-input-short{
+    width: 60px;
+  }
+
+  .form-input-med{
+    width: 100px;
+  }
+
   .input-box {
     margin:var(--margin-padding);
     border: 2px solid var(--dark);
     border-radius: var(--border-radius);
-    width: 500px;
+    width:500px;
   }
   .text-input{
     border-radius: var(--border-radius);

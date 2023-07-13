@@ -92,26 +92,39 @@
 
   </div> 
 
+  <br class="space">
+
     <!--Random return based on bitcoin value below-->
+
+    <div class="section input-box">
     <div id="random-search-container" class="user-input-container">
-      <H4>I have <input name="bitcoin-input" id="bitcoin-input" type="number" class="form-input-xshort bcInpu"> Bitcoin,
-        show me a house I can buy.</H4>
+      <p>I have <input name="bitcoin-input" id="bitcoin-input" type="number" class="text-input form-input-xshort bcInpu"> Bitcoin,
+        show me a house I can buy.</p>
       <p>Optional Inputs</p>
       <!--City input for random return-->
+    <div class="py-2 has-text-centered">
       <label class="input-label" for="city-random">City</label>
-      <input name="city-random" id="city-random" type="text" class="form-input-med" />
+      <input name="city-random" id="city-random" type="text" class="text-input form-input-med" />
+    </div>
+
       <!--State input for random return-->
       <!--State Input-->
+    <div class="py-2 has-text-centered">
       <div class="input-group" id="state-random">
         <label class="input-label" for="state-random">State</label>
-        <select id="random-select">
+        <select id="random-select" class="text-input">
         </select>
       </div>
+      </div>
+
       <!--Submit Button for random return-->
-      <button type="submit" class="btn btnFindAHouse"> <a href="./thirdPage.html" class="btn btn-primary">
+       <div class="py-2 has-text-centered">
+      <button type="submit" class="btnFindAHouse btn-primary"> <a class="btn" href="./thirdPage.html" >
           Find a house!
         </a></button>
+      </div>
     </div>
+  </div>
     </form>
   </main>
 
