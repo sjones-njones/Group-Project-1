@@ -5,8 +5,10 @@ $(function () {
   var randomSelect = $('#random-select');
 
 
+
+
   // finds current bc value and uses it to convert house value to bitcoin (see line 20)
-  function getBitcoinVal(valueEl) {
+  function getBitcoinVal(zestimateEl, housepicEl) {
     fetch("https://rest.coinapi.io/v1/exchangerate/BTC/USD", {
       headers: { 'X-CoinAPI-Key': '406DA5B8-4FA9-4947-81FE-5A06619B3BB3' }
     })
@@ -15,12 +17,20 @@ $(function () {
       })
       .then(function (data) {
         var rateEl = data.rate.toFixed(2);
-        console.log(valueEl);
+        console.log(zestimateEl);
         console.log(rateEl);
-        bcValue = (valueEl / rateEl).toFixed(0);
+        bcValue = (zestimateEl / rateEl).toFixed(0);
         console.log(bcValue);
+        var myHouseObject = {
+          pic: housepicEl,
+          bitcoinHouseValue: bcValue
+        };
+        localStorage.setItem("myHouse", JSON.stringify(myHouseObject));
+
+
       });
   }
+
 
   // gathers info from random input box
   function formRandomSubmitHandler(event, rateEl) {
@@ -32,6 +42,7 @@ $(function () {
     console.log(bitcoinInputEl);
     bitcoinUser(bitcoinInputEl, randomAddress);
   }
+
 
   //  uses bitcoin api to define parameters for amount user can spend
   function bitcoinUser(bitcoinInputEl, randomAddress) {
@@ -46,12 +57,13 @@ $(function () {
         var rateEl = data.rate;
         maxPrice = (bitcoinInputEl * rateEl).toFixed(0);
         console.log(maxPrice);
-        locationSearch(randomAddress, maxPrice);
+        locationSearch(randomAddress, maxPrice, rateEl);
       });
   }
 
-//sets parameters for house search  
-  function locationSearch(randomAddress, maxPrice) {
+
+  //sets parameters for house search  
+  function locationSearch(randomAddress, maxPrice, rateEl) {
     const url = 'https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=' + randomAddress + '&home_type=Houses&sort=Price_High_Low&maxPrice=' + maxPrice;
     fetch(url, {
       headers: {
@@ -64,8 +76,23 @@ $(function () {
       })
       .then(function (data) {
         console.log(data);
+        var priceArray = [];
+        for (let i = 0; i < data.props.length; i++) {
+          var cart = {
+            address: data.props[i].address,
+            price: data.props[i].price,
+            bcPrice: (data.props[i].price)/rateEl,
+            imgSrc: data.props[i].imgSrc
+          };
+          priceArray.push(cart);
+        }
+        console.log(priceArray);
+        localStorage.setItem("myHouse", JSON.stringify(priceArray));
       });
+
+
   }
+
 
   // gets user input for address
   var formSubmitHandler = function (event) {
@@ -78,6 +105,7 @@ $(function () {
     var addressEl = streetEl + aptEl + " " + cityEl + " " + stateEl + " " + zipEl
     useAddress(addressEl);
   }
+
 
   // uses user address to get zpid
   function useAddress(addressVariable) {
@@ -94,9 +122,12 @@ $(function () {
         var zpidEl = data.zpid;
         getValue(zpidEl);
 
+
       });
 
+
   }
+
 
   // uses zpid to get house value
   function getValue(zpidEl) {
@@ -112,9 +143,14 @@ $(function () {
       .then(function (data) {
         var housepicEl = data.imgSrc;
         var zestimateEl = data.zestimate;
-        getBitcoinVal(zestimateEl);
+        getBitcoinVal(zestimateEl, housepicEl);
+
+
       });
   }
+
+
+
 
 
 
@@ -128,9 +164,13 @@ $(function () {
     $(randomSelect).append(randomOptionEl);
   });
 
+
   // submit button for address input
   $(".btnSubmit").on("click", formSubmitHandler);
   $("#btnRandomSubmit").on("click", formRandomSubmitHandler);
 
 
+
+
 });
+
