@@ -64,16 +64,20 @@ function useAddress(addressEl) {
       console.log(data);
       console.log(data.props[12].zpid);
 
-      for(i=0; i < 8; i++){
+      addEventListener
 
-      var imageHouse = document.createElement('p');
-      imageHouse.textContent = data.props[i].imgScr;
-      pictureHere.append(data.props[i].imgScr);
+      for(i=0; i < 8; i++){
+      var imageHouse = data.props[i].imgSrc;
+      displayimage(imageHouse);
 
       var addressInfo = document.createElement('p');
       addressInfo.textContent = data.props[i].zpid;
       pictureHere.append(data.props[i].zpid);
 
+      }
+
+      function displayimage(imageHouse){
+        document.getElementById('image').src = imageHouse;
       }
 
     });
