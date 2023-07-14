@@ -4,24 +4,70 @@ $(function () {
   var stateSelect = $('#state-select');
   var randomSelect = $('#random-select');
 
-  // finds current bc value and uses it to convert house value to bitcoin (see line 20)
-  function getBitcoinVal(zestimateEl){
-  fetch("https://rest.coinapi.io/v1/exchangerate/BTC/USD", {
-    headers: { 'X-CoinAPI-Key': '406DA5B8-4FA9-4947-81FE-5A06619B3BB3' }
-  })
-    .then(function (response) {
-      return response.json()
-    })
-    .then(function (data) {
-      var rateEl = data.rate.toFixed(2);
-      console.log (zestimateEl);
-      console.log (rateEl);
-      bcValue = zestimateEl/rateEl;
-      console.log(bcValue);
-    });
-    }
 
-    // gets user input for address
+  // finds current bc value and uses it to convert house value to bitcoin (see line 20)
+  function getBitcoinVal(valueEl) {
+    fetch("https://rest.coinapi.io/v1/exchangerate/BTC/USD", {
+      headers: { 'X-CoinAPI-Key': '406DA5B8-4FA9-4947-81FE-5A06619B3BB3' }
+    })
+      .then(function (response) {
+        return response.json()
+      })
+      .then(function (data) {
+        var rateEl = data.rate.toFixed(2);
+        console.log(valueEl);
+        console.log(rateEl);
+        bcValue = (valueEl / rateEl).toFixed(0);
+        console.log(bcValue);
+      });
+  }
+
+  // gathers info from random input box
+  function formRandomSubmitHandler(event, rateEl) {
+    event.preventDefault();
+    var staterandomEl = $(randomSelect).val().trim();
+    var cityRandom = $('#city-random').val().trim();
+    var randomAddress = cityRandom + staterandomEl;
+    var bitcoinInputEl = $("#bitcoin-input").val().trim();
+    console.log(bitcoinInputEl);
+    bitcoinUser(bitcoinInputEl, randomAddress);
+  }
+
+  //  uses bitcoin api to define parameters for amount user can spend
+  function bitcoinUser(bitcoinInputEl, randomAddress) {
+    fetch("https://rest.coinapi.io/v1/exchangerate/BTC/USD", {
+      headers: { 'X-CoinAPI-Key': '406DA5B8-4FA9-4947-81FE-5A06619B3BB3' }
+    })
+      .then(function (response) {
+        return response.json()
+      })
+      .then(function (data) {
+        console.log(data.rate);
+        var rateEl = data.rate;
+        maxPrice = (bitcoinInputEl * rateEl).toFixed(0);
+        console.log(maxPrice);
+        locationSearch(randomAddress, maxPrice);
+      });
+  }
+
+//sets parameters for house search  
+  function locationSearch(randomAddress, maxPrice) {
+    const url = 'https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=' + randomAddress + '&home_type=Houses&sort=Price_High_Low&maxPrice=' + maxPrice;
+    fetch(url, {
+      headers: {
+        'X-RapidAPI-Key': '0e88e3b544msh53627318f7da7a0p18e841jsn5dd8f250f5f6',
+        'X-RapidAPI-Host': 'zillow-com1.p.rapidapi.com'
+      }
+    })
+      .then(function (response) {
+        return response.json()
+      })
+      .then(function (data) {
+        console.log(data);
+      });
+  }
+
+  // gets user input for address
   var formSubmitHandler = function (event) {
     event.preventDefault();
     var streetEl = $("#street-address").val().trim();
@@ -34,8 +80,8 @@ $(function () {
   }
 
   // uses user address to get zpid
-  function useAddress(addressEl) {
-    fetch('https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=' + addressEl + '&home_type=Houses', {
+  function useAddress(addressVariable) {
+    fetch('https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=' + addressVariable + '&home_type=Houses?per_page=100&page=1', {
       headers: {
         'X-RapidAPI-Key': '0e88e3b544msh53627318f7da7a0p18e841jsn5dd8f250f5f6',
         'X-RapidAPI-Host': 'zillow-com1.p.rapidapi.com'
@@ -47,25 +93,30 @@ $(function () {
       .then(function (data) {
         var zpidEl = data.zpid;
         getValue(zpidEl);
+
       });
+
   }
 
   // uses zpid to get house value
-  function getValue (zpidEl) {
-  fetch('https://zillow-com1.p.rapidapi.com/property?zpid=' + zpidEl, {
-    headers: {
-      'X-RapidAPI-Key': '0e88e3b544msh53627318f7da7a0p18e841jsn5dd8f250f5f6',
-      'X-RapidAPI-Host': 'zillow-com1.p.rapidapi.com'
-    }
-  })
-    .then(function (response) {
-      return response.json()
+  function getValue(zpidEl) {
+    fetch('https://zillow-com1.p.rapidapi.com/property?zpid=' + zpidEl, {
+      headers: {
+        'X-RapidAPI-Key': '0e88e3b544msh53627318f7da7a0p18e841jsn5dd8f250f5f6',
+        'X-RapidAPI-Host': 'zillow-com1.p.rapidapi.com'
+      }
     })
-    .then(function (data) {
-      var zestimateEl = data.zestimate;
-      getBitcoinVal(zestimateEl);
-        });
+      .then(function (response) {
+        return response.json()
+      })
+      .then(function (data) {
+        var housepicEl = data.imgSrc;
+        var zestimateEl = data.zestimate;
+        getBitcoinVal(zestimateEl);
+      });
   }
+
+
 
   // for state dropdown list
   $.each(myOptions, function (index, option) {
@@ -77,6 +128,9 @@ $(function () {
     $(randomSelect).append(randomOptionEl);
   });
 
-  // submit button for address input 
+  // submit button for address input
   $(".btnSubmit").on("click", formSubmitHandler);
+  $("#btnRandomSubmit").on("click", formRandomSubmitHandler);
+
+
 });
