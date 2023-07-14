@@ -1,21 +1,5 @@
 /*
 
-    fetch('https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=' + addressEl + '&home_type=Houses', {
-      headers: {
-        'X-RapidAPI-Key': '0e88e3b544msh53627318f7da7a0p18e841jsn5dd8f250f5f6',
-        'X-RapidAPI-Host': 'zillow-com1.p.rapidapi.com'
-      }
-    })
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (data) {
-        var zpidEl = data.zpid;
-        getValue(zpidEl);
-      });
-  }
-
-
 Math.floor(Math.random() * 10); <-- may not use as we could just run a for loop
 through an array put into local storage
 
@@ -64,24 +48,42 @@ function useAddress(addressEl) {
       console.log(data);
       console.log(data.props[12].zpid);
 
-      addEventListener
-
-      for(i=0; i < 8; i++){
-      var imageHouse = data.props[i].imgSrc;
-      displayimage(imageHouse);
+      var i= 0;
 
       var addressInfo = document.createElement('p');
+
+      const tryAgain = document.getElementById("tryAgain");
+      tryAgain.addEventListener("click", searchCityWeatherInput);
+
+      function searchCityWeatherInput() {
+
+        pictureHere.remove(addressInfo);
+
+       // var addressEl = streetEl + aptEl + " " + cityEl + " " + stateEl + " " + zipEl;
+
+      document.getElementById('image').src = data.props[i].imgSrc;
+
+        
+
       addressInfo.textContent = data.props[i].zpid;
       pictureHere.append(data.props[i].zpid);
 
-      }
+        if (i < data.props.length - 1){
+          i++;
+        } else {
+          i = 0;
+        }
+        window.onload = searchCityWeatherInput;
 
-      function displayimage(imageHouse){
-        document.getElementById('image').src = imageHouse;
+
       }
 
     });
-}
+
+    };
+
+
+
 
 //https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=patuxentAve.BroomesIslandMaryland20615&home_type=Houses0e88e3b544msh53627318f7da7a0p18e841jsn5dd8f250f5f6
 
