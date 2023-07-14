@@ -81,7 +81,7 @@
   .text-input{
     border-radius: var(--border-radius);
     border: 2px solid var(--dark);
-    height: 40px;
+    height: 35px;
   }
 
   label{
