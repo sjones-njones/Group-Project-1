@@ -33,6 +33,43 @@ $(function () {
     useAddress(addressEl);
   }
 
+  //get array of addresses based on search city + state
+  var ranSubmitHandler = function (event) {
+    event.preventDefault();
+    var ranCityEl = $("#city-random").val().trim();
+    var ranStateEl = $("#random-select").val().trim();
+    //var bitCoinEl = //user defined bitcoin 
+    var maxPrice = 200000
+    var minPrice = 190000
+    var searchAddressEl = ranCityEl + " " + ranStateEl;
+
+    locationSearch(searchAddressEl, maxPrice, minPrice);
+
+  }
+
+  //get array for real for real 
+  var locationSearch = function (location, maxPrice, minPrice) {
+    var locationURL = new URL('https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?');
+    locationURL.searchParams.append("location", location)
+    locationURL.searchParams.append("maxPrice", maxPrice)
+    locationURL.searchParams.append("minPrice",minPrice)
+
+
+    fetch(locationURL, {headers: {
+      'X-RapidAPI-Key': '0e88e3b544msh53627318f7da7a0p18e841jsn5dd8f250f5f6',
+        'X-RapidAPI-Host': 'zillow-com1.p.rapidapi.com'
+    }})
+    .then(function (response) {
+      return response.json();
+
+    })
+    .then(function (data) {
+
+      localStorage.setItem("house-search", JSON.stringify(data));
+
+    })
+  }
+
   // uses user address to get zpid
   function useAddress(addressEl) {
     fetch('https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=' + addressEl + '&home_type=Houses', {
@@ -46,6 +83,7 @@ $(function () {
       })
       .then(function (data) {
         var zpidEl = data.zpid;
+        console.log(zpidEl);
         getValue(zpidEl);
       });
   }
@@ -79,4 +117,6 @@ $(function () {
 
   // submit button for address input 
   $(".btnSubmit").on("click", formSubmitHandler);
+  $(".btnFindAHouse").on("click", ranSubmitHandler);
 });
+  
