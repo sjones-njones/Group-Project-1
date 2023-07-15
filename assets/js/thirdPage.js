@@ -1,5 +1,7 @@
 /*
 
+plan of attack
+
 Math.floor(Math.random() * 10); <-- may not use as we could just run a for loop
 through an array put into local storage
 
@@ -19,21 +21,12 @@ display info i.e. address, street name, zip etc
 var pictureHere = document.querySelector('.Picture-here')
 
 var formSubmitHandler = function () {
-  /*
-  var streetEl = $("#street-address").val().trim();
-  var aptEl = $("#apt-number").val().trim();
-  var cityEl = $("#city-address").val().trim();
-  var stateEl = $("#state-select").val().trim();
-  var zipEl = $("#zip-address").val().trim();
- var addressEl = streetEl + aptEl + " " + cityEl + " " + stateEl + " " + zipEl
- */
- var addressEl = 'atlantaGeorgia';
+
+ var addressEl = 'orlandoFlorida';
   useAddress(addressEl);
 }
 formSubmitHandler();
-//patuxentAve.BroomesIslandMaryland20615
 
-// uses user address to get zpid
 function useAddress(addressEl) {
   fetch('https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=' + addressEl + '&home_type=Houses', {
     headers: {
@@ -57,33 +50,30 @@ function useAddress(addressEl) {
 
       function searchCityWeatherInput() {
 
-        pictureHere.remove(addressInfo);
+       document.getElementById('image').src = data.props[i].imgSrc;
 
-       // var addressEl = streetEl + aptEl + " " + cityEl + " " + stateEl + " " + zipEl;
+       document.getElementById('addressEl').textContent = data.props[i].address + " " + data.props[i].zpid;
 
-      document.getElementById('image').src = data.props[i].imgSrc;
+       document.getElementById('saleEl').textContent = " This property currently is " + data.props[i].listingStatus;
 
-        
-
-      addressInfo.textContent = data.props[i].zpid;
-      pictureHere.append(data.props[i].zpid);
+       document.getElementById('priceEl').textContent = "$" + data.props[i].price;
 
         if (i < data.props.length - 1){
           i++;
         } else {
           i = 0;
         }
-        window.onload = searchCityWeatherInput;
 
 
       }
+
+      window.addEventListener("load", searchCityWeatherInput());
 
     });
 
     };
 
-
-
+    
 
 //https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=patuxentAve.BroomesIslandMaryland20615&home_type=Houses0e88e3b544msh53627318f7da7a0p18e841jsn5dd8f250f5f6
 
