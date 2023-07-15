@@ -86,10 +86,15 @@ function locationSearch(randomAddress, maxPrice, rateEl) {
       priceArray.push(cart);
     }
     console.log(priceArray);
+    localStorage.setItem("Thisisatest", testvalue);
     localStorage.setItem("randomHouses", JSON.stringify(priceArray));
     document.location.replace("./thirdPage.html");
       });
 }
+
+
+
+export const testvalue = "This means you got local storage";
 
 
 // gets user input for address
