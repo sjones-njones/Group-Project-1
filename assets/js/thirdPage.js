@@ -20,13 +20,10 @@ display info i.e. address, street name, zip etc
 */
 
 //localStorage.getItem("randomHouses");
+//localStorage.setItem("Thisisatest", 'abc');
 
-import { 
-  testvalue
-} from './script.js';
-console.log(testvalue);
-
-localStorage.getItem("Thisisatest");
+localStorage.getItem("Thisisatest", testvalue);
+console.log(localStorage.getItem("Thisisatest"));
 //console.log(localStorage.getItem("randomHouses"));
 console.log(localStorage.getItem("Thisisatest", ));
 
@@ -86,6 +83,14 @@ function useAddress(addressEl) {
 
     };
 
+    var goBackHomeBtn = document.querySelector('#homeBtn');
+
+    goBackHomeBtn.addEventListener(clearStorage());
+
+    clearStorage(){
+      localStorage.removeItem("Thisisatest");
+     // localStorage.removeItem("randomHouses");
+    }
     
 
 //https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=patuxentAve.BroomesIslandMaryland20615&home_type=Houses0e88e3b544msh53627318f7da7a0p18e841jsn5dd8f250f5f6
