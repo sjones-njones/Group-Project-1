@@ -1,6 +1,5 @@
 $(function () {
 
-
   function goHome(){
     document.location.replace("./index.html");
   }
@@ -18,6 +17,3 @@ $(pictureEl).attr("src", myHouseEl.pic);
  getItems();
   $("#homeBtn").on("click", goHome);
   });
-
-
-

@@ -16,6 +16,7 @@ $(function () {
   
   
   // finds current bc value and uses it to convert house value to bitcoin (see line 20)
+
   function getBitcoinVal(zestimateEl, housepicEl, addressSite) {
     fetch("https://rest.coinapi.io/v1/exchangerate/BTC/USD", {
       headers: { 'X-CoinAPI-Key': '406DA5B8-4FA9-4947-81FE-5A06619B3BB3' }
@@ -25,7 +26,7 @@ $(function () {
     })
     .then(function (data) {
       var rateEl = data.rate.toFixed(2);
-      console.log(zestimateEl);
+        console.log(zestimateEl);
         console.log(rateEl);
         bcValue = (zestimateEl / rateEl).toFixed(0);
         console.log(bcValue);
@@ -40,8 +41,7 @@ $(function () {
     }
     
     
-    
-    
+
     // gathers info from random input box
     function formRandomSubmitHandler(event, rateEl) {
       event.preventDefault();
@@ -56,10 +56,7 @@ $(function () {
     
     
     
-    
-    
-    
-    
+
     //  uses bitcoin api to define parameters for amount user can spend
     function bitcoinUser(bitcoinInputEl, randomAddress) {
       fetch("https://rest.coinapi.io/v1/exchangerate/BTC/USD", {
@@ -125,6 +122,7 @@ $(function () {
   
   // gets user input for address
   var formSubmitHandler = function (event) {
+
     event.preventDefault();
     var streetEl = $("#street-address").val().trim();
     var aptEl = $("#apt-number").val().trim();
@@ -149,7 +147,7 @@ $(function () {
     }
   }
 
-  
+
   
 
   var searchedAddressArray = JSON.parse(localStorage.getItem("myAddress")) || [];
@@ -180,7 +178,6 @@ var addressEl;
 
 
 
-
   // uses user address to get zpid
   function useAddress(addressVariable) {
     fetch('https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=' + addressVariable + '&home_type=Houses?per_page=100&page=1', {
@@ -200,11 +197,6 @@ var addressEl;
 
 
 
-
-
-
-
-
   // uses zpid to get house value
   function getValue(zpidEl) {
     fetch('https://zillow-com1.p.rapidapi.com/property?zpid=' + zpidEl, {
@@ -220,14 +212,10 @@ var addressEl;
         var addressSite = data.address;
         var housepicEl = data.imgSrc;
         var zestimateEl = data.zestimate;
+
         getBitcoinVal(zestimateEl, housepicEl, addressSite);
       });
   }
-
-
-
-
-
 
 
 
@@ -242,6 +230,7 @@ var addressEl;
   });
 
 
+
   function init() {
     renderAddressButtons();
   }
@@ -252,4 +241,6 @@ var addressEl;
   $(".btnSubmit").on("click", formSubmitHandler);
   $("#btnRandomSubmit").on("click", formRandomSubmitHandler);
   $(addressContainer).on("click", "button", handleButtons);
+
 });
+
