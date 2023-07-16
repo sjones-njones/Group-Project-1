@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <header class="">
+  <header class="header">
     <h3> <span></span> Bitcoin buys you a house like...
     </h3>
     <div>
@@ -24,13 +24,18 @@
   </header>
 
   <main>
-   <!-- house scr will be added dynamically to img with0 search -->
-    <div>
-      <img src="" alt="Picture of user's house" width="475" height="315">
+
+   <!-- house scr will be added dynamically to img with search -->
+    <div class="Picture-here">
+      <img id="image" src="" alt="Picture of user's house" width="475" height="315">
+      <p id="addressEl"></p>
+      <p id="saleEl"></p>
+      <p id="priceEl"></p>
+
     </div>
   </main>
 
-  <button type="tryAgain" class="btn">Try Again!</button>
+  <button id="tryAgain" type="tryAgain" class="btn">Try Again!</button>
   <footer>
     <H4>Produced by group-6 aka the <!---Insert group name here --></H4>
   </footer>
