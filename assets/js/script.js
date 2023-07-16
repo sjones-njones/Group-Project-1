@@ -16,7 +16,7 @@ $(function () {
   
   
   // finds current bc value and uses it to convert house value to bitcoin (see line 20)
-  function getBitcoinVal(zestimateEl, housepicEl) {
+  function getBitcoinVal(zestimateEl, housepicEl, addressSite) {
     fetch("https://rest.coinapi.io/v1/exchangerate/BTC/USD", {
       headers: { 'X-CoinAPI-Key': '406DA5B8-4FA9-4947-81FE-5A06619B3BB3' }
     })
@@ -30,6 +30,7 @@ $(function () {
         bcValue = (zestimateEl / rateEl).toFixed(0);
         console.log(bcValue);
         var myHouseObject = {
+          address: addressSite,
           pic: housepicEl,
           bitcoinHouseValue: bcValue
         };
@@ -134,6 +135,7 @@ $(function () {
     useAddress(addressEl);
     saveLastAddress(addressEl);
     renderAddressButtons();
+    
         }
   
   
@@ -215,9 +217,10 @@ var addressEl;
         return response.json()
       })
       .then(function (data) {
+        var addressSite = data.address;
         var housepicEl = data.imgSrc;
         var zestimateEl = data.zestimate;
-        getBitcoinVal(zestimateEl, housepicEl);
+        getBitcoinVal(zestimateEl, housepicEl, addressSite);
       });
   }
 
