@@ -62,7 +62,7 @@ sentPriceHouse = JSON.parse(sentPriceHouse);
 
     function showResultsPrice() { 
 
-      document.getElementById('inputRangeEl').textContent = sentPriceHouse[0].maxPriceInput;
+      document.getElementById('inputRangeEl').textContent = "This is the BitCoin you have " + sentPriceHouse[0]. bitCoinInput;
 
      document.getElementById('imageEl').src = sentPriceHouse[i].imgSrc;
 

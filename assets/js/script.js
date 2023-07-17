@@ -56,13 +56,13 @@ function bitcoinUser(bitcoinInputEl, randomAddress) {
     var rateEl = data.rate;
     maxPrice = (bitcoinInputEl * rateEl).toFixed(0);
     console.log(maxPrice);
-    locationSearch(randomAddress, maxPrice, rateEl);
+    locationSearch(randomAddress, maxPrice, rateEl, bitcoinInputEl);
   });
 }
 
 
 //sets parameters for house search  
-function locationSearch(randomAddress, maxPrice, rateEl) {
+function locationSearch(randomAddress, maxPrice, rateEl, bitcoinInputEl) {
   const url = 'https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=' + randomAddress + '&home_type=Houses&sort=Price_High_Low&maxPrice=' + maxPrice;
   fetch(url, {
     headers: {
@@ -78,9 +78,9 @@ function locationSearch(randomAddress, maxPrice, rateEl) {
     var priceArray = [];
     for (let i = 0; i < data.props.length; i++) {
       var cart = {
-        maxPriceInput: maxPrice,
+        bitCoinInput: bitcoinInputEl,
         address: data.props[i].address,
-       // zipCode:  data.props[i].zpid,
+        zipCode:  data.props[i].zpid,
         price: data.props[i].price,
         bcPrice: (data.props[i].price) / rateEl,
         forSale: data.props[i].listingStatus,
