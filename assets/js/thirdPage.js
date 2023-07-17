@@ -29,8 +29,6 @@ console.log(Test);
 
 var pictureHere = document.querySelector('.Picture-here')
 
-var formSubmitHandler = function () {
-
   /*
  var addressEl = 'orlandoFlorida';
   useAddress(addressEl);
@@ -55,15 +53,6 @@ function useAddress(addressEl) {
 
       var i= 0;
 
-      var addressInfo = document.createElement('p');
-
-      const tryAgain = document.getElementById("tryAgain");
-      tryAgain.addEventListener("click", showResultsPrice);
-
-      
-
-     
-    };
 
     function showResultsPrice() { 
 
@@ -72,15 +61,15 @@ sentPriceHouse = JSON.parse(sentPriceHouse);
 
       console.log(sentPriceHouse);
 
-     document.getElementById('image').src = sentPriceHouse[0].imgSrc;
+     document.getElementById('image').src = sentPriceHouse[i].imgSrc;
 
-     document.getElementById('addressEl').textContent =  sentPriceHouse[0].address + " " + sentPriceHouse[0].zpid;
+     document.getElementById('addressEl').textContent =  sentPriceHouse[i].address + " " + sentPriceHouse[i].zpid;
 
-     document.getElementById('saleEl').textContent = " This property currently is " + sentPriceHouse[0].bcprice;
+     document.getElementById('saleEl').textContent = " This property currently is " + sentPriceHouse[i].bcprice;
 
-     document.getElementById('priceEl').textContent = "$" +sentPriceHouse[0].price;
+     document.getElementById('priceEl').textContent = "$" +sentPriceHouse[i].price;
 
-      if (i < data.props.length - 1){
+      if (i < sentPriceHouse.length - 1){
         i++;
       } else {
         i = 0;
@@ -89,6 +78,9 @@ sentPriceHouse = JSON.parse(sentPriceHouse);
 
     }
     showResultsPrice();
+
+    const tryAgain = document.getElementById("#tryAgain");
+    tryAgain.addEventListener("click", showResultsPrice);
 
     var goBackHomeBtn = document.querySelector('#homeBtn');
 
