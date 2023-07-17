@@ -2,7 +2,7 @@ var pictureHere = document.querySelector('.Picture-here')
 
 var formSubmitHandler = function () {
 
- var addressEl = 'orlandoFlorida';
+  var addressEl = 'orlandoFlorida';
   useAddress(addressEl);
 }
 formSubmitHandler();
@@ -21,7 +21,7 @@ function useAddress(addressEl) {
       console.log(data);
       console.log(data.props[12].zpid);
 
-      var i= 0;
+      var i = 0;
 
       var addressInfo = document.createElement('p');
 
@@ -30,15 +30,15 @@ function useAddress(addressEl) {
 
       function searchCityWeatherInput() {
 
-       document.getElementById('image').src = data.props[i].imgSrc;
+        document.getElementById('image').src = data.props[i].imgSrc;
 
-       document.getElementById('addressEl').textContent = data.props[i].address + " " + data.props[i].zpid;
+        document.getElementById('addressEl').textContent = data.props[i].address + " " + data.props[i].zpid;
 
-       document.getElementById('saleEl').textContent = " This property currently is " + data.props[i].listingStatus;
+        document.getElementById('saleEl').textContent = " This property currently is " + data.props[i].listingStatus;
 
-       document.getElementById('priceEl').textContent = "$" + data.props[i].price;
+        document.getElementById('priceEl').textContent = "$" + data.props[i].price;
 
-        if (i < data.props.length - 1){
+        if (i < data.props.length - 1) {
           i++;
         } else {
           i = 0;
@@ -51,22 +51,22 @@ function useAddress(addressEl) {
 
     });
 
-    };
+};
 
 //===========//
 
 $(function () {
 
 
-  function goHome(){
+  function goHome() {
     localStorage.removeItem("randomHouses");
     document.location.replace("./index.html");
   }
-  
-  
-  
-  
+
+
+
+
   $("#homeBtn").on("click", goHome);
-  });
-  
+});
+
 

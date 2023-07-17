@@ -190,7 +190,7 @@ $(function () {
   }
 
   // submit button for address input
-  $(".btnSubmit").on("click", formSubmitHandler);
+  $("#btnSubmit").on("click", formSubmitHandler);
   $("#btnRandomSubmit").on("click", formRandomSubmitHandler);
   $(addressContainer).on("click", "button", handleButtons);
   init();
