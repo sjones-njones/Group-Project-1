@@ -19,13 +19,13 @@ display info i.e. address, street name, zip etc
 
 */
 
-//localStorage.getItem("randomHouses");
-//localStorage.setItem("Thisisatest", 'abc');
 
-localStorage.getItem("Thisisatest", testvalue);
-console.log(localStorage.getItem("Thisisatest"));
-//console.log(localStorage.getItem("randomHouses"));
-console.log(localStorage.getItem("Thisisatest", ));
+
+
+var Test = localStorage.getItem("Thisisatest");
+console.log(Test);
+
+
 
 var pictureHere = document.querySelector('.Picture-here')
 
@@ -60,36 +60,43 @@ function useAddress(addressEl) {
       const tryAgain = document.getElementById("tryAgain");
       tryAgain.addEventListener("click", showResultsPrice);
 
-      function showResultsPrice() {
+      
 
-       document.getElementById('image').src = data.props[i].imgSrc;
+     
+    };
 
-       document.getElementById('addressEl').textContent = data.props[i].address + " " + data.props[i].zpid;
+    function showResultsPrice() { 
 
-       document.getElementById('saleEl').textContent = " This property currently is " + data.props[i].listingStatus;
+      var sentPriceHouse = localStorage.getItem("randomHouses");
+sentPriceHouse = JSON.parse(sentPriceHouse);
 
-       document.getElementById('priceEl').textContent = "$" + data.props[i].price;
+      console.log(sentPriceHouse);
 
-        if (i < data.props.length - 1){
-          i++;
-        } else {
-          i = 0;
-        }
+     document.getElementById('image').src = sentPriceHouse[0].imgSrc;
 
+     document.getElementById('addressEl').textContent =  sentPriceHouse[0].address + " " + sentPriceHouse[0].zpid;
 
+     document.getElementById('saleEl').textContent = " This property currently is " + sentPriceHouse[0].bcprice;
+
+     document.getElementById('priceEl').textContent = "$" +sentPriceHouse[0].price;
+
+      if (i < data.props.length - 1){
+        i++;
+      } else {
+        i = 0;
       }
 
-      window.addEventListener("load", showResultsPrice());
 
-    };
+    }
+    showResultsPrice();
 
     var goBackHomeBtn = document.querySelector('#homeBtn');
 
-    goBackHomeBtn.addEventListener(clearStorage());
+    goBackHomeBtn.addEventListener("click", clearStorage);
 
-    clearStorage(){
+    function clearStorage(){
       localStorage.removeItem("Thisisatest");
-     // localStorage.removeItem("randomHouses");
+      localStorage.removeItem("randomHouses");
     }
     
 

@@ -74,7 +74,7 @@ function locationSearch(randomAddress, maxPrice, rateEl) {
     return response.json()
   })
   .then(function (data) {
-    console.log(data);
+    console.log(data); 
     var priceArray = [];
     for (let i = 0; i < data.props.length; i++) {
       var cart = {
@@ -86,8 +86,10 @@ function locationSearch(randomAddress, maxPrice, rateEl) {
       priceArray.push(cart);
     }
     console.log(priceArray);
-    var testvalue = 'This is working';
+
+    var testvalue = 'The local storage has mad it working';
     localStorage.setItem("Thisisatest", testvalue);
+
     localStorage.setItem("randomHouses", JSON.stringify(priceArray));
     document.location.replace("./thirdPage.html");
       });
@@ -161,3 +163,9 @@ var formSubmitHandler = function (event) {
   $("#btnRandomSubmit").on("click", formRandomSubmitHandler);
 });
 
+
+
+
+var testvalue = 'The connect is working but the local storage may not be';
+
+localStorage.setItem("Thisisatest", testvalue);
