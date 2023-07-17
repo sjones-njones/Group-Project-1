@@ -27,7 +27,39 @@ $(function () {
         localStorage.setItem("myHouse", JSON.stringify(myHouseObject));
         document.location.replace("./secondPage.html");
       });
-  }
+    }
+    
+    
+    // gathers info from random input box
+    function formRandomSubmitHandler(event, rateEl) {
+      event.preventDefault();
+      var staterandomEl = $(randomSelect).val().trim();
+      var cityRandom = $('#city-random').val().trim();
+      var randomAddress = cityRandom + staterandomEl;
+      var bitcoinInputEl = $("#bitcoin-input").val().trim();
+      console.log(bitcoinInputEl);
+      bitcoinUser(bitcoinInputEl, randomAddress);
+    }
+    
+    
+    
+    
+//  uses bitcoin api to define parameters for amount user can spend
+function bitcoinUser(bitcoinInputEl, randomAddress) {
+  fetch("https://rest.coinapi.io/v1/exchangerate/BTC/USD", {
+    headers: { 'X-CoinAPI-Key': '406DA5B8-4FA9-4947-81FE-5A06619B3BB3' }
+  })
+  .then(function (response) {
+    return response.json()
+  })
+  .then(function (data) {
+    console.log(data.rate);
+    var rateEl = data.rate;
+    maxPrice = (bitcoinInputEl * rateEl).toFixed(0);
+    console.log(maxPrice);
+    locationSearch(randomAddress, maxPrice, rateEl, bitcoinInputEl);
+  });
+}
 
   // gathers info from random input box
   function formRandomSubmitHandler(event, rateEl) {
@@ -40,20 +72,40 @@ $(function () {
     bitcoinUser(bitcoinInputEl, randomAddress);
   }
 
-  //  uses bitcoin api to define parameters for amount user can spend
-  function bitcoinUser(bitcoinInputEl, randomAddress) {
-    fetch("https://rest.coinapi.io/v1/exchangerate/BTC/USD", {
-      headers: { 'X-CoinAPI-Key': '406DA5B8-4FA9-4947-81FE-5A06619B3BB3' }
-    })
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (data) {
-        console.log(data.rate);
-        var rateEl = data.rate;
-        maxPrice = (bitcoinInputEl * rateEl).toFixed(0);
-        console.log(maxPrice);
-        locationSearch(randomAddress, maxPrice, rateEl);
+
+//sets parameters for house search  
+function locationSearch(randomAddress, maxPrice, rateEl, bitcoinInputEl) {
+  const url = 'https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=' + randomAddress + '&home_type=Houses&sort=Price_High_Low&maxPrice=' + maxPrice;
+  fetch(url, {
+    headers: {
+      'X-RapidAPI-Key': '0e88e3b544msh53627318f7da7a0p18e841jsn5dd8f250f5f6',
+      'X-RapidAPI-Host': 'zillow-com1.p.rapidapi.com'
+    }
+  })
+  .then(function (response) {
+    return response.json()
+  })
+  .then(function (data) {
+    console.log(data); 
+    var priceArray = [];
+    for (let i = 0; i < data.props.length; i++) {
+      var cart = {
+        bitCoinInput: bitcoinInputEl,
+        address: data.props[i].address,
+        zipCode:  data.props[i].zpid,
+        price: data.props[i].price,
+        bcPrice: (data.props[i].price) / rateEl,
+        forSale: data.props[i].listingStatus,
+        imgSrc: data.props[i].imgSrc
+      };
+      priceArray.push(cart);
+    }
+
+    var testvalue = 'The array is delivered';
+    localStorage.setItem("Thisisatest", testvalue);
+
+    localStorage.setItem("randomHouses", JSON.stringify(priceArray));
+    document.location.replace("./thirdPage.html");
       });
   }
 
@@ -87,8 +139,9 @@ $(function () {
       });
   }
 
-  // gets user input for address
-  var formSubmitHandler = function (event) {
+// gets user input for address
+var formSubmitHandler = function (event) {
+
     event.preventDefault();
     var streetEl = $("#street-address").val().trim();
     var aptEl = $("#apt-number").val().trim();
@@ -196,4 +249,8 @@ $(function () {
   init();
 });
 
+
+var testvalue = 'The connection is working';
+
+localStorage.setItem("Thisisatest", testvalue);
 
