@@ -19,121 +19,111 @@
   <title>Bitcoin to House Converter</title>
 </head>
 
-
 <body>
-
   <header class="top-header py-5 has-text-centered has-background-info is-size-3 title">
-
     <H3>How many Bitcoin is your house worth?</H3>
-
-
   </header>
-
-
   <main>
-
-    <h2 class="subtitle is-size-15 has-text-centered is-4">Input an address below</h2>
-
-
-
-
+    
     <!--Search by address is below-->
     <div id="address-search-container" class="user-input-container has-text-centered">
       <div class="section input-box">
+        <h2 class="subtitle is-size-15 has-text-centered is-4">Input an address below</h2>
 
         <div class="columns">
-     
-      <div class="column is-size-6-desktop is-size-6-tablet">
-      <form id="address-input-form">
-        <!--Street Adress Input -->
-      <div class="py-2 has-text-centered">
-        <label class="input-label" for="street-address">Street Address:</label>
-        <input name="street-address" id="street-address" type="text" class="text-input form-input-large" />
-      </div>
-        <!--Apt Number Input-->
-      <div class="py-2 has-text-centered">
-        <label class="input-label" for="Apt">Apt:</label>
-        <input name="apt-number" id="apt-number" type="text" class="text-input form-input-short" />
-      </div>
-        <!--City Input-->
-      <div class="py-2 has-text-centered">
-        <label class="input-label" for="city-address">City:</label>
-        <input name="city-address" id="city-address" type="text" class="text-input form-input-med" />
-      </div>
-        <!--State Input-->
-      <div class="py-2 has-text-centered">
-        <div class="input-group" id="state-address">
-          <label class="input-label" for="state-address">State:</label>
-          <select id="state-select" class="text-input"> </select>
+
+          <div class="column is-size-6-desktop is-size-6-tablet">
+            <form id="address-input-form">
+              <!--Street Adress Input -->
+              <div class="py-2 has-text-centered">
+                <label class="input-label" for="street-address">Street Address:</label>
+                <input name="street-address" id="street-address" type="text" class="text-input form-input-large" />
+              </div>
+              <!--Apt Number Input-->
+              <div class="py-2 has-text-centered">
+                <label class="input-label" for="Apt">Apt:</label>
+                <input name="apt-number" id="apt-number" type="text" class="text-input form-input-short" />
+              </div>
+              <!--City Input-->
+              <div class="py-2 has-text-centered">
+                <label class="input-label" for="city-address">City:</label>
+                <input name="city-address" id="city-address" type="text" class="text-input form-input-med" />
+              </div>
+              <!--State Input-->
+              <div class="py-2 has-text-centered">
+                <div class="input-group" id="state-address">
+                  <label class="input-label" for="state-address">State:</label>
+                  <select id="state-select" class="text-input"> </select>
+                </div>
+              </div>
+
+
+
+
+              <!--Zipcode Input-->
+              <div class="py-2 has-text-centered">
+                <label class="input-label" for="zip-address">Zip Code:</label>
+                <input name="zip-address" id="zip-address" type="text" class="text-input form-input-short" />
+              </div>
+
+              <!--Submit Button-->
+
+              <div class="py-2 has-text-centered">
+                <button type="submit" class="btn btnSubmit"> Submit
+                </button>
+              </div>
+            </form>
+
+          </div>
+
         </div>
+        
+        
       </div>
-
-
-
-
-        <!--Zipcode Input-->
-      <div class="py-2 has-text-centered">
-        <label class="input-label" for="zip-address">Zip Code:</label>
-        <input name="zip-address" id="zip-address" type="text" class="text-input form-input-short" />
-      </div>
-
-        <!--Submit Button-->
-
-      <div class="py-2 has-text-centered">
-        <button type="submit" class="btnSubmit">
-        </button>
-      </div>
-      </form>
+      
+              <div class="column is-size-6-desktop is-size-6-tablet">
+      
+                <!--Empty div container for historic searchs-->
+                <div id="previous-search-container" class="historic-container">
+                </div>
+              </div>
 
     </div>
 
-    </div>
-
-    <div class="column is-size-6-desktop is-size-6-tablet">
-
-      <!--Empty div container for historic searchs-->
-      <div id="previous-search-container" class="historic-container">
-      </div>
-    </div>
-
-
-    </div>
-
-  </div> 
-
-  <br class="space">
+    <br class="space">
 
 
     <!--Random return based on bitcoin value below-->
 
     <div class="section input-box">
-    <div id="random-search-container" class="user-input-container">
-      <p>I have <input name="bitcoin-input" id="bitcoin-input" type="number" class="text-input form-input-xshort bcInpu"> Bitcoin,
-        show me a house I can buy.</p>
-      <p>Optional Inputs</p>
-      <!--City input for random return-->
-    <div class="py-2 has-text-centered">
-      <label class="input-label" for="city-random">City</label>
-      <input name="city-random" id="city-random" type="text" class="text-input form-input-med" />
-    </div>
+      <div id="random-search-container" class="user-input-container">
+        <p>I have <input name="bitcoin-input" id="bitcoin-input" type="number"
+            class="text-input form-input-xshort bcInpu"> Bitcoin,
+          show me a house I can buy.</p>
+        <p>Optional Inputs</p>
+        <!--City input for random return-->
+        <div class="py-2 has-text-centered">
+          <label class="input-label" for="city-random">City</label>
+          <input name="city-random" id="city-random" type="text" class="text-input form-input-med" />
+        </div>
 
-      <!--State input for random return-->
-      <!--State Input-->
-    <div class="py-2 has-text-centered">
-      <div class="input-group" id="state-random">
-        <label class="input-label" for="state-random">State</label>
-        <select id="random-select" class="text-input">
-        </select>
-      </div>
-      </div>
+        <!--State input for random return-->
+        <!--State Input-->
+        <div class="py-2 has-text-centered">
+          <div class="input-group" id="state-random">
+            <label class="input-label" for="state-random">State</label>
+            <select id="random-select" class="text-input">
+            </select>
+          </div>
+        </div>
 
-      <!--Submit Button for random return-->
-       <div class="py-2 has-text-centered">
-      <button id = "btnRandomSubmit" type="submit" class="btn btnFindAHouse">           Find a house!
-        </button>
-    </div>
-  </div>
-    </form>
+        <!--Submit Button for random return-->
+        <div class="py-2 has-text-centered">
+          <button id="btnRandomSubmit" type="submit" class="btn btnFindAHouse"> Find a house!
+          </button>
+        </div>
+      </div>
+      </form>
   </main>
 
 
@@ -142,7 +132,7 @@
   </footer>
 
 
-<!-- mnh  -->
+  <!-- mnh  -->
   <!--linked jquery-->
   <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
     crossorigin="anonymous"></script>
