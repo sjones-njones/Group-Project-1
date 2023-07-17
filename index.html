@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="has-background-grey-lighter" lang="en">
 
 
 <head>
@@ -19,121 +19,109 @@
   <title>Bitcoin to House Converter</title>
 </head>
 
-<body>
-  <header class="top-header py-5 has-text-centered has-background-info is-size-3 title">
-    <H3>How many Bitcoin is your house worth?</H3>
+<body class="mt-5 container has-background-light has-text-centered">
+
+  <header class="m-3">
+    <H1 class="has-text-weight-semibold is-size-2-tablet">How many Bitcoin is your house worth?</H1>
+
   </header>
+
   <main>
-    
-    <!--Search by address is below-->
-    <div id="address-search-container" class="user-input-container has-text-centered">
-      <div class="section input-box">
-        <h2 class="subtitle is-size-15 has-text-centered is-4">Input an address below</h2>
+    <section id="address-search-container"
+      class="user-input-container container has-background-primary-light is-align-content-center p-4 m-4 ">
+      <div>
+        <h2 class="has-text-weight-medium  is-size-4-tablet">Input an address below</h2>
+      </div>
+      <form id="address-input-form">
+        <!--Search by address is below-->
 
-        <div class="columns">
+        <div class="mt-3 columns is-gapless is-centered">
+          <div class="column is-one-quarter">
+            <!--Street Adress Input -->
+            <label class="label" for="street-address">Street Address</label>
+            <input name="street-address" id="street-address" type="text" class="form-input-large" />
 
-          <div class="column is-size-6-desktop is-size-6-tablet">
-            <form id="address-input-form">
-              <!--Street Adress Input -->
-              <div class="py-2 has-text-centered">
-                <label class="input-label" for="street-address">Street Address:</label>
-                <input name="street-address" id="street-address" type="text" class="text-input form-input-large" />
-              </div>
-              <!--Apt Number Input-->
-              <div class="py-2 has-text-centered">
-                <label class="input-label" for="Apt">Apt:</label>
-                <input name="apt-number" id="apt-number" type="text" class="text-input form-input-short" />
-              </div>
-              <!--City Input-->
-              <div class="py-2 has-text-centered">
-                <label class="input-label" for="city-address">City:</label>
-                <input name="city-address" id="city-address" type="text" class="text-input form-input-med" />
-              </div>
-              <!--State Input-->
-              <div class="py-2 has-text-centered">
-                <div class="input-group" id="state-address">
-                  <label class="input-label" for="state-address">State:</label>
-                  <select id="state-select" class="text-input"> </select>
-                </div>
-              </div>
+            <!--City Input-->
+            <label class="label" for="city-address">City</label>
+            <input name="city-address" id="city-address" type="text" class="form-input-med" />
+
+            <!--Zipcode Input-->
+            <label class="label" for="zip-address">Zip Code</label>
+            <input name="zip-address" id="zip-address" type="text" class="form-input-short" />
+          </div>
+
+          <div class="column is-one-quarter">
+            <!--Apt Number Input-->
+            <label class="label" for="Apt">Apt</label>
+            <input name="apt-number" id="apt-number" type="text" class="form-input-short" />
+
+            <!--State Input-->
+            <label class="label" for="state-select">State</label>
+            <select class="input-select" id="state-select"></select>
+          </div>
+        </div>
+
+        <!--Submit Button-->
+        <button type="submit" id="btnSubmit" class="button is-primary is-rounded"> Submit
+        </button>
+
+      </form>
+    </section>
+
+    <!--Empty div container for historic searchs-->
+    <div id="previous-search-container" class="historic-container">
+    </div>
+
+    </div>
 
 
+    <section id="random-search-container" class="user-input-container  has-background-primary-light p-4 m-4">
+      <H2 class="has-text-weight-medium is-size-4-tablet">I have <input name="bitcoin-input" id="bitcoin-input"
+          type="number" class="form-input-xshort bcInput">
+        Bitcoin, <br>
+        show me a house I can buy.</H2>
 
+      <!--Random return based on bitcoin value below-->
+      <form class="mt-5" id="random-search-inputs">
+        <p class="has-text-weight-normal is-size-5-tablet">Optional Inputs</p>
 
-              <!--Zipcode Input-->
-              <div class="py-2 has-text-centered">
-                <label class="input-label" for="zip-address">Zip Code:</label>
-                <input name="zip-address" id="zip-address" type="text" class="text-input form-input-short" />
-              </div>
+        <div class="mt-3 columns is-gapless is-centered">
 
-              <!--Submit Button-->
+          <div class="column is-one-quarter">
+            <!--City input for random return-->
+            <label class="label" for="city-random">City</label>
+            <input name="city-random" id="city-random" type="text" class="form-input-med" />
+          </div>
 
-              <div class="py-2 has-text-centered">
-                <button type="submit" class="btn btnSubmit"> Submit
-                </button>
-              </div>
-            </form>
-
+          <div class="column is-one-quarter">
+            <!--State input for random return-->
+            <label class="label" for="state-random">State</label>
+            <select id="random-select">
+            </select>
           </div>
 
         </div>
 
-
-        <!--Zipcode Input-->
-        <label class="input-label" for="zip-address">Zip Code</label>
-        <input name="zip-address" id="zip-address" type="text" class="form-input-short" />
-        <!--Submit Button-->
-        <button type="submit" class="btn btnSubmit">
-                      Submit
-        
+        <!--Submit Button for random return-->
+        <button id="btnRandomSubmit" type="submit" class="button is-primary is-rounded"> Find a house!
         </button>
       </form>
 
-      <!--Empty div container for historic searchs-->
-      <div id="previous-search-container" class="historic-container">
       </div>
 
-    </div>
 
-    <br class="space">
-
-
-    <!--Random return based on bitcoin value below-->
-    <div id="random-search-container" class="user-input-container">
-      <H4>I have <input name="bitcoin-input" id="bitcoin-input" type="number" class="form-input-xshort bcInpu"> Bitcoin,
-        show me a house I can buy.</H4>
-      <p>Optional Inputs</p>
-      <!--City input for random return-->
-      <label class="input-label" for="city-random">City</label>
-      <input name="city-random" id="city-random" type="text" class="form-input-med" />
-      <!--State input for random return-->
-      <!--State Input-->
-      <div class="input-group" id="state-random">
-        <label class="input-label" for="state-random">State</label>
-        <select id="random-select">
-        </select>
-      </div>
-      <!--Submit Button for random return-->
-      <button id = "btnRandomSubmit" type="submit" class="btn btnFindAHouse">           Find a house!
-        </button>
-    </div>
-    </form>
   </main>
-
 
   <footer>
     <H4>Produced by group-6 aka the <!---Insert group name here --></H4>
   </footer>
 
-<!-- mnh  -->
+  <!-- mnh  -->
   <!--linked jquery-->
   <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
     crossorigin="anonymous"></script>
   <!--linked script.js-->
   <script src="./assets/js/script.js"></script>
-
-
-
 
 
 
