@@ -51,23 +51,26 @@ function useAddress(addressEl) {
       console.log(data.props[12].zpid);
 */
 
-      var i= 0;
+var i = 0;
+
+var sentPriceHouse = localStorage.getItem("randomHouses");
+sentPriceHouse = JSON.parse(sentPriceHouse);
+
+  
+      console.log(sentPriceHouse);
 
 
     function showResultsPrice() { 
 
-      var sentPriceHouse = localStorage.getItem("randomHouses");
-sentPriceHouse = JSON.parse(sentPriceHouse);
+      document.getElementById('inputRangeEl').textContent = sentPriceHouse[0].maxPriceInput;
 
-      console.log(sentPriceHouse);
+     document.getElementById('imageEl').src = sentPriceHouse[i].imgSrc;
 
-     document.getElementById('image').src = sentPriceHouse[i].imgSrc;
+     document.getElementById('addressEl').textContent =  sentPriceHouse[i].address + " " + sentPriceHouse[i].zipCode;
 
-     document.getElementById('addressEl').textContent =  sentPriceHouse[i].address + " " + sentPriceHouse[i].zpid;
+     document.getElementById('saleEl').textContent = " This property currently is " + sentPriceHouse[i].forSale;
 
-     document.getElementById('saleEl').textContent = " This property currently is " + sentPriceHouse[i].bcprice;
-
-     document.getElementById('priceEl').textContent = "$" +sentPriceHouse[i].price;
+     document.getElementById('priceEl').textContent = "This is worth $" + sentPriceHouse[i].price + " and coverted to BitCoin is " + sentPriceHouse[i].bcPrice;
 
       if (i < sentPriceHouse.length - 1){
         i++;
@@ -79,7 +82,7 @@ sentPriceHouse = JSON.parse(sentPriceHouse);
     }
     showResultsPrice();
 
-    const tryAgain = document.getElementById("#tryAgain");
+    var tryAgain = document.querySelector('#tryAgainBtn');
     tryAgain.addEventListener("click", showResultsPrice);
 
     var goBackHomeBtn = document.querySelector('#homeBtn');

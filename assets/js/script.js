@@ -78,16 +78,18 @@ function locationSearch(randomAddress, maxPrice, rateEl) {
     var priceArray = [];
     for (let i = 0; i < data.props.length; i++) {
       var cart = {
+        maxPriceInput: maxPrice,
         address: data.props[i].address,
+       // zipCode:  data.props[i].zpid,
         price: data.props[i].price,
         bcPrice: (data.props[i].price) / rateEl,
+        forSale: data.props[i].listingStatus,
         imgSrc: data.props[i].imgSrc
       };
       priceArray.push(cart);
     }
-    console.log(priceArray);
 
-    var testvalue = 'The local storage has mad it working';
+    var testvalue = 'The array is delivered';
     localStorage.setItem("Thisisatest", testvalue);
 
     localStorage.setItem("randomHouses", JSON.stringify(priceArray));
@@ -166,6 +168,6 @@ var formSubmitHandler = function (event) {
 
 
 
-var testvalue = 'The connect is working but the local storage may not be';
+var testvalue = 'The connection is working';
 
 localStorage.setItem("Thisisatest", testvalue);
