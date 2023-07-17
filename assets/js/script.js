@@ -119,7 +119,7 @@ $(function () {
       for (var i = 0; i < storedAddresses.length; i++) {
         var button = document.createElement("button");
         $(button).text(storedAddresses[i]);
-        $(button).addClass("storedButtons");
+        $(button).addClass(" button is-primary rounded m-1 p-2");
         $(addressContainer).append(button);
       }
     }
