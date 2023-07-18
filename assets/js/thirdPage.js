@@ -1,9 +1,6 @@
-var Test = localStorage.getItem("Thisisatest");
-console.log(Test);
 
 
 
-var pictureHere = document.querySelector('.Picture-here')
 
 var i = 0;
 
@@ -12,19 +9,19 @@ sentPriceHouse = JSON.parse(sentPriceHouse);
 
   
       console.log(sentPriceHouse);
+      console.log(sentPriceHouse[i]);
 
 
     function showResultsPrice() { 
+      console.log(sentPriceHouse[i]);
 
-      document.getElementById('inputRangeEl').textContent = "This is the BitCoin you have " + sentPriceHouse[0]. bitCoinInput;
+      document.getElementById('inputRangeEl').textContent = "This is the BitCoin you have " + sentPriceHouse[i].bitCoinInput;
 
-     document.getElementById('imageEl').src = sentPriceHouse[i].imgSrc;
+      document.getElementById('imageEl').src = sentPriceHouse[i].imgSrc;
 
      document.getElementById('addressEl').textContent =  sentPriceHouse[i].address + " " + sentPriceHouse[i].zipCode;
 
-     document.getElementById('saleEl').textContent = " This property currently is " + sentPriceHouse[i].forSale;
-
-     document.getElementById('priceEl').textContent = "This is worth $" + sentPriceHouse[i].price + " and coverted to BitCoin is " + sentPriceHouse[i].bcPrice;
+     document.getElementById('priceEl').textContent = "This is worth $" + sentPriceHouse[i].price + " and coverted to BitCoin is " + sentPriceHouse[i].bcPrice.toFixed(2);
 
       if (i < sentPriceHouse.length - 1){
         i++;
@@ -32,19 +29,19 @@ sentPriceHouse = JSON.parse(sentPriceHouse);
         i = 0;
       }
 
-
     }
     showResultsPrice();
 
     var tryAgain = document.querySelector('#tryAgainBtn');
     tryAgain.addEventListener("click", showResultsPrice);
 
+
     var goBackHomeBtn = document.querySelector('#homeBtn');
 
     goBackHomeBtn.addEventListener("click", clearStorage);
 
     function clearStorage(){
-      localStorage.removeItem("Thisisatest");
+      document.location.replace("./index.html");
       localStorage.removeItem("randomHouses");
     }
    

@@ -74,43 +74,39 @@ function bitcoinUser(bitcoinInputEl, randomAddress) {
 
 
 //sets parameters for house search  
-function locationSearch(randomAddress, maxPrice, rateEl, bitcoinInputEl) {
-  const url = 'https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=' + randomAddress + '&home_type=Houses&sort=Price_High_Low&maxPrice=' + maxPrice;
-  fetch(url, {
-    headers: {
-      'X-RapidAPI-Key': '0e88e3b544msh53627318f7da7a0p18e841jsn5dd8f250f5f6',
-      'X-RapidAPI-Host': 'zillow-com1.p.rapidapi.com'
-    }
-  })
-  .then(function (response) {
-    return response.json()
-  })
-  .then(function (data) {
-    console.log(data); 
-    var priceArray = [];
-    for (let i = 0; i < data.props.length; i++) {
-      var cart = {
-        bitCoinInput: bitcoinInputEl,
-        address: data.props[i].address,
-        zipCode:  data.props[i].zpid,
-        price: data.props[i].price,
-        bcPrice: (data.props[i].price) / rateEl,
-        forSale: data.props[i].listingStatus,
-        imgSrc: data.props[i].imgSrc
-      };
-      priceArray.push(cart);
-    }
+// function locationSearch(randomAddress, maxPrice, rateEl, bitcoinInputEl) {
+//   const url = 'https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=' + randomAddress + '&home_type=Houses&sort=Price_High_Low&maxPrice=' + maxPrice;
+//   fetch(url, {
+//     headers: {
+//       'X-RapidAPI-Key': '0e88e3b544msh53627318f7da7a0p18e841jsn5dd8f250f5f6',
+//       'X-RapidAPI-Host': 'zillow-com1.p.rapidapi.com'
+//     }
+//   })
+//   .then(function (response) {
+//     return response.json()
+//   })
+//   .then(function (data) {
+//     console.log(data); 
+//     var priceArray = [];
+//     for (let i = 0; i < data.props.length; i++) {
+//       var cart = {
+//         bitCoinInput: bitcoinInputEl,
+//         address: data.props[i].address,
+//         zipCode:  data.props[i].zpid,
+//         price: data.props[i].price,
+//         bcPrice: (data.props[i].price) / rateEl,
+//         imgSrc: data.props[i].imgSrc
+//       };
+//       priceArray.push(cart);
+//     }
 
-    var testvalue = 'The array is delivered';
-    localStorage.setItem("Thisisatest", testvalue);
-
-    localStorage.setItem("randomHouses", JSON.stringify(priceArray));
-    document.location.replace("./thirdPage.html");
-      });
-  }
+//     localStorage.setItem("randomHouses", JSON.stringify(priceArray));
+//     document.location.replace("./thirdPage.html");
+//       });
+//   }
 
   //sets parameters for house search  
-  function locationSearch(randomAddress, maxPrice, rateEl) {
+  function locationSearch(randomAddress, maxPrice, rateEl, bitcoinInputEl) {
     const url = 'https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=' + randomAddress + '&home_type=Houses&sort=Price_High_Low&maxPrice=' + maxPrice;
     fetch(url, {
       headers: {
@@ -126,7 +122,9 @@ function locationSearch(randomAddress, maxPrice, rateEl, bitcoinInputEl) {
         var priceArray = [];
         for (let i = 0; i < data.props.length; i++) {
           var cart = {
+            bitCoinInput: bitcoinInputEl,
             address: data.props[i].address,
+            zipCode:  data.props[i].zpid,
             price: data.props[i].price,
             bcPrice: (data.props[i].price) / rateEl,
             imgSrc: data.props[i].imgSrc
@@ -250,7 +248,4 @@ var formSubmitHandler = function (event) {
 });
 
 
-var testvalue = 'The connection is working';
-
-localStorage.setItem("Thisisatest", testvalue);
 
