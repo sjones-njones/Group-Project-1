@@ -1,7 +1,4 @@
 
-
-
-
 var i = 0;
 
 var sentPriceHouse = localStorage.getItem("randomHouses");
@@ -45,3 +42,4 @@ sentPriceHouse = JSON.parse(sentPriceHouse);
       localStorage.removeItem("randomHouses");
     }
    
+  
