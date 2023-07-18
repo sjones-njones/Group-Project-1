@@ -1,12 +1,16 @@
 $(function () {
   // for the dropdowns in html
   var myOptions = { "":"", "AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "FL": "Florida", "GA": "Georgia", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KS": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PA": "Pennsylvania", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming" }
+  var myCurrencyOptions = {"":"Choose a currency", "BTC": "Bitcoin", "ETH": "Ethereum", "DOGE": "Dogecoin"}
   var stateSelect = $('#state-select');
   var randomSelect = $('#random-select');
   var addressContainer = $('#previous-search-container');
 
   // finds current bc value and uses it to convert house value to bitcoin (see line 20)
   function getBitcoinVal(zestimateEl, housepicEl, addressSite) {
+    var currencySelect = $("#currency-select").val().trim();
+    console.log(currencySelect);
+
     fetch("https://rest.coinapi.io/v1/exchangerate/BTC/USD", {
       headers: { 'X-CoinAPI-Key': '406DA5B8-4FA9-4947-81FE-5A06619B3BB3' }
     })
@@ -30,6 +34,23 @@ $(function () {
     }
     
     
+    //  uses bitcoin api to define parameters for amount user can spend
+    function bitcoinUser(bitcoinInputEl, randomAddress) {
+      fetch("https://rest.coinapi.io/v1/exchangerate/BTC/USD", {
+        headers: { 'X-CoinAPI-Key': '406DA5B8-4FA9-4947-81FE-5A06619B3BB3' }
+      })
+      .then(function (response) {
+        return response.json()
+      })
+      .then(function (data) {
+        console.log(data.rate);
+        var rateEl = data.rate;
+        maxPrice = (bitcoinInputEl * rateEl).toFixed(0);
+        console.log(maxPrice);
+        locationSearch(randomAddress, maxPrice, rateEl, bitcoinInputEl);
+      });
+    }
+    
     // gathers info from random input box
     function formRandomSubmitHandler(event, rateEl) {
       event.preventDefault();
@@ -40,40 +61,8 @@ $(function () {
       console.log(bitcoinInputEl);
       bitcoinUser(bitcoinInputEl, randomAddress);
     }
-    
-    
-    
-    
-//  uses bitcoin api to define parameters for amount user can spend
-function bitcoinUser(bitcoinInputEl, randomAddress) {
-  fetch("https://rest.coinapi.io/v1/exchangerate/BTC/USD", {
-    headers: { 'X-CoinAPI-Key': '406DA5B8-4FA9-4947-81FE-5A06619B3BB3' }
-  })
-  .then(function (response) {
-    return response.json()
-  })
-  .then(function (data) {
-    console.log(data.rate);
-    var rateEl = data.rate;
-    maxPrice = (bitcoinInputEl * rateEl).toFixed(0);
-    console.log(maxPrice);
-    locationSearch(randomAddress, maxPrice, rateEl, bitcoinInputEl);
-  });
-}
-
-  // gathers info from random input box
-  function formRandomSubmitHandler(event, rateEl) {
-    event.preventDefault();
-    var staterandomEl = $(randomSelect).val().trim();
-    var cityRandom = $('#city-random').val().trim();
-    var randomAddress = cityRandom + staterandomEl;
-    var bitcoinInputEl = $("#bitcoin-input").val().trim();
-    console.log(bitcoinInputEl);
-    bitcoinUser(bitcoinInputEl, randomAddress);
-  }
-
-
-//sets parameters for house search  
+       
+        //sets parameters for house search  
 function locationSearch(randomAddress, maxPrice, rateEl, bitcoinInputEl) {
   const url = 'https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=' + randomAddress + '&home_type=Houses&sort=Price_High_Low&maxPrice=' + maxPrice;
   fetch(url, {
@@ -141,13 +130,13 @@ function locationSearch(randomAddress, maxPrice, rateEl, bitcoinInputEl) {
 
 // gets user input for address
 var formSubmitHandler = function (event) {
-
     event.preventDefault();
     var streetEl = $("#street-address").val().trim();
     var aptEl = $("#apt-number").val().trim();
     var cityEl = $("#city-address").val().trim();
     var stateEl = $("#state-select").val().trim();
-    var zipEl = $("#zip-address").val().trim();
+    console.log(stateEl);
+        var zipEl = $("#zip-address").val().trim();
     var addressEl = streetEl + aptEl + " " + cityEl + " " + stateEl + " " + zipEl;
     useAddress(addressEl);
     saveLastAddress(addressEl);
@@ -168,6 +157,7 @@ var formSubmitHandler = function (event) {
   function renderAddressButtons() {
     var storedAddresses = JSON.parse(localStorage.getItem("myAddress"));
     if (storedAddresses !== null) {
+      $(".historic-container").removeClass("is-hidden");
       $(addressContainer).text("");
       for (var i = 0; i < storedAddresses.length; i++) {
         var button = document.createElement("button");
@@ -227,6 +217,12 @@ var formSubmitHandler = function (event) {
         getBitcoinVal(zestimateEl, housepicEl, addressSite);
       });
   }
+  // for state dropdown list
+  $.each(myCurrencyOptions, function (index, option) {
+    var currencyOptionEl = $("<option>");
+    $(currencyOptionEl).text(option);
+    $("#currency-select").append(currencyOptionEl);
+  });
 
   // for state dropdown list
   $.each(myOptions, function (index, option) {
@@ -248,9 +244,3 @@ var formSubmitHandler = function (event) {
   $(addressContainer).on("click", "button", handleButtons);
   init();
 });
-
-
-var testvalue = 'The connection is working';
-
-localStorage.setItem("Thisisatest", testvalue);
-
