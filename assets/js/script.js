@@ -7,11 +7,9 @@ $(function () {
   var addressContainer = $('#previous-search-container');
 
   // finds current bc value and uses it to convert house value to bitcoin (see line 20)
-  function getBitcoinVal(zestimateEl, housepicEl, addressSite) {
-    var currencySelect = $("#currency-select").val().trim();
-    console.log(currencySelect);
-
-    fetch("https://rest.coinapi.io/v1/exchangerate/BTC/USD", {
+  function getBitcoinVal(zestimateEl, housepicEl, addressSite, currencyCode) {
+console.log(currencyCode);
+    fetch("https://rest.coinapi.io/v1/exchangerate/" + currencyCode + "/USD", {
       headers: { 'X-CoinAPI-Key': '406DA5B8-4FA9-4947-81FE-5A06619B3BB3' }
     })
       .then(function (response) {
@@ -23,10 +21,17 @@ $(function () {
         console.log(rateEl);
         bcValue = (zestimateEl / rateEl).toFixed(0);
         console.log(bcValue);
+        if (currencyCode === "BTC"){
+var unit = " Bitcoin";
+        } else if (currencyCode === "ETH"){
+          var unit = " Ethereum";
+                  } else {
+                    var unit = " Dogecoin";
+                  }
         var myHouseObject = {
           address: addressSite,
           pic: housepicEl,
-          bitcoinHouseValue: bcValue
+          bitcoinHouseValue: new Intl.NumberFormat('en-US').format(bcValue) + unit
         };
         localStorage.setItem("myHouse", JSON.stringify(myHouseObject));
         document.location.replace("./secondPage.html");
@@ -63,21 +68,21 @@ $(function () {
     }
        
         //sets parameters for house search  
-function locationSearch(randomAddress, maxPrice, rateEl, bitcoinInputEl) {
-  const url = 'https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=' + randomAddress + '&home_type=Houses&sort=Price_High_Low&maxPrice=' + maxPrice;
-  fetch(url, {
-    headers: {
-      'X-RapidAPI-Key': '0e88e3b544msh53627318f7da7a0p18e841jsn5dd8f250f5f6',
-      'X-RapidAPI-Host': 'zillow-com1.p.rapidapi.com'
-    }
-  })
-  .then(function (response) {
-    return response.json()
-  })
-  .then(function (data) {
-    console.log(data); 
-    var priceArray = [];
-    for (let i = 0; i < data.props.length; i++) {
+        function locationSearch(randomAddress, maxPrice, rateEl, bitcoinInputEl) {
+          const url = 'https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=' + randomAddress + '&home_type=Houses&sort=Price_High_Low&maxPrice=' + maxPrice;
+          fetch(url, {
+            headers: {
+              'X-RapidAPI-Key': '0e88e3b544msh53627318f7da7a0p18e841jsn5dd8f250f5f6',
+              'X-RapidAPI-Host': 'zillow-com1.p.rapidapi.com'
+            }
+          })
+          .then(function (response) {
+            return response.json()
+          })
+          .then(function (data) {
+            console.log(data); 
+            var priceArray = [];
+            for (let i = 0; i < data.props.length; i++) {
       var cart = {
         bitCoinInput: bitcoinInputEl,
         address: data.props[i].address,
@@ -89,71 +94,42 @@ function locationSearch(randomAddress, maxPrice, rateEl, bitcoinInputEl) {
       };
       priceArray.push(cart);
     }
-
-    var testvalue = 'The array is delivered';
-    localStorage.setItem("Thisisatest", testvalue);
-
     localStorage.setItem("randomHouses", JSON.stringify(priceArray));
     document.location.replace("./thirdPage.html");
-      });
+  });
   }
-
-  //sets parameters for house search  
-  function locationSearch(randomAddress, maxPrice, rateEl) {
-    const url = 'https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=' + randomAddress + '&home_type=Houses&sort=Price_High_Low&maxPrice=' + maxPrice;
-    fetch(url, {
-      headers: {
-        'X-RapidAPI-Key': '0e88e3b544msh53627318f7da7a0p18e841jsn5dd8f250f5f6',
-        'X-RapidAPI-Host': 'zillow-com1.p.rapidapi.com'
-      }
-    })
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (data) {
-        console.log(data);
-        var priceArray = [];
-        for (let i = 0; i < data.props.length; i++) {
-          var cart = {
-            address: data.props[i].address,
-            price: data.props[i].price,
-            bcPrice: (data.props[i].price) / rateEl,
-            imgSrc: data.props[i].imgSrc
-          };
-          priceArray.push(cart);
-        }
-        console.log(priceArray);
-        localStorage.setItem("randomHouses", JSON.stringify(priceArray));
-        document.location.replace("./thirdPage.html");
-      });
-  }
-
-// gets user input for address
-var formSubmitHandler = function (event) {
+  
+  // gets user input for address
+  var formSubmitHandler = function (event) {
     event.preventDefault();
     var streetEl = $("#street-address").val().trim();
     var aptEl = $("#apt-number").val().trim();
     var cityEl = $("#city-address").val().trim();
     var stateEl = $("#state-select").val().trim();
     console.log(stateEl);
-        var zipEl = $("#zip-address").val().trim();
+    var zipEl = $("#zip-address").val().trim();
     var addressEl = streetEl + aptEl + " " + cityEl + " " + stateEl + " " + zipEl;
-    useAddress(addressEl);
-    saveLastAddress(addressEl);
-    renderAddressButtons();
+    var currencySelect = $("#currency-select").val().trim();
+    console.log(currencySelect);
+    var addressAndCurrency = addressEl + " " +  currencySelect;
+    console.log (addressAndCurrency);
+    useAddress(addressEl, currencySelect);
+    saveLastAddress(addressAndCurrency);
   }
-
-  function saveLastAddress(addressEl) {
-    if (!searchedAddressArray.includes(addressEl)) {
-      searchedAddressArray.unshift(addressEl);
+  
+  function saveLastAddress(addressAndCurrency) {
+    if (!searchedAddressArray.includes(addressAndCurrency)) {
+      searchedAddressArray.unshift(addressAndCurrency);
       if (searchedAddressArray.length > 3) {
         searchedAddressArray.pop();
       }
       localStorage.setItem("myAddress", JSON.stringify(searchedAddressArray));
+      renderAddressButtons();
     }
   }
 
   var searchedAddressArray = JSON.parse(localStorage.getItem("myAddress")) || [];
+
   function renderAddressButtons() {
     var storedAddresses = JSON.parse(localStorage.getItem("myAddress"));
     if (storedAddresses !== null) {
@@ -182,7 +158,7 @@ var formSubmitHandler = function (event) {
   }
 
   // uses user address to get zpid
-  function useAddress(addressVariable) {
+  function useAddress(addressVariable, currencySelect) {
     fetch('https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=' + addressVariable + '&home_type=Houses?per_page=100&page=1', {
       headers: {
         'X-RapidAPI-Key': '0e88e3b544msh53627318f7da7a0p18e841jsn5dd8f250f5f6',
@@ -194,12 +170,12 @@ var formSubmitHandler = function (event) {
       })
       .then(function (data) {
         var zpidEl = data.zpid;
-        getValue(zpidEl);
+        getValue(zpidEl, currencySelect);
       });
   }
 
   // uses zpid to get house value
-  function getValue(zpidEl) {
+  function getValue(zpidEl, currencySelect) {
     fetch('https://zillow-com1.p.rapidapi.com/property?zpid=' + zpidEl, {
       headers: {
         'X-RapidAPI-Key': '0e88e3b544msh53627318f7da7a0p18e841jsn5dd8f250f5f6',
@@ -213,15 +189,24 @@ var formSubmitHandler = function (event) {
         var addressSite = data.address;
         var housepicEl = data.imgSrc;
         var zestimateEl = data.zestimate;
-
-        getBitcoinVal(zestimateEl, housepicEl, addressSite);
-      });
+        
+          if (currencySelect === "Bitcoin"){
+            var currencyCode = "BTC";
+          } else if (currencySelect === "Ethereum"){
+            var currencyCode = "ETH";
+          } else {
+            var currencyCode = "DOGE";
+          }
+          console.log(currencyCode);
+          getBitcoinVal(zestimateEl, housepicEl, addressSite, currencyCode);
+              });
   }
-  // for state dropdown list
+  // // for currency dropdown list
   $.each(myCurrencyOptions, function (index, option) {
     var currencyOptionEl = $("<option>");
     $(currencyOptionEl).text(option);
     $("#currency-select").append(currencyOptionEl);
+    
   });
 
   // for state dropdown list
