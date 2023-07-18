@@ -87,6 +87,8 @@ function bitcoinUser(bitcoinInputEl, randomAddress) {
       .then(function (data) {
         console.log(data);
         var priceArray = [];
+
+        if (randomAddress){
         for (let i = 0; i < data.props.length; i++) {
           var cart = {
             bitCoinInput: bitcoinInputEl,
@@ -96,6 +98,16 @@ function bitcoinUser(bitcoinInputEl, randomAddress) {
             bcPrice: (data.props[i].price) / rateEl,
             imgSrc: data.props[i].imgSrc
           };
+        } 
+      } else if (data.props.address = null){
+          var cart = {
+            bitCoinInput: bitcoinInputEl,
+            address: " where address is",
+            zipCode: " where zip is",
+            price: "price",
+            bcPrice: "00.000",
+            imgSrc: "the image"
+        }
           priceArray.push(cart);
         }
         console.log(priceArray);
