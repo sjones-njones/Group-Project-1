@@ -30,30 +30,35 @@
     <section id="address-search-container"
       class="user-input-container column-is-one-quarter  has-background-primary-light is-align-content-center p-4 m-4 rounded">
 
+        
+            <!-- Currency Input--> 
+            <label class="label" for="currency-select">Cryptocurrencies</label>
+            <select class="input-select" id="currency-select"></select>
+
             <!--Search by address is below-->
             <h2 class="has-text-weight-medium  is-size-4-tablet">Input an address below</h2>
                     
             <!--Street Adress Input -->
             <label class="label" for="street-address">Street Address</label>
             <input name="street-address" id="street-address" type="text" class="form-input-large" />
-
-            <!--City Input-->
-            <label class="label" for="city-address">City</label>
-            <input name="city-address" id="city-address" type="text" class="form-input-med" />
-
-            <!--Zipcode Input-->
-            <label class="label" for="zip-address">Zip Code</label>
-            <input name="zip-address" id="zip-address" type="text" class="form-input-short" />
-                    
+            
             <!--Apt Number Input-->
             <label class="label" for="Apt">Apt</label>
             <input name="apt-number" id="apt-number" type="text" class="form-input-short" />
-
+            
+            <!--City Input-->
+            <label class="label" for="city-address">City</label>
+            <input name="city-address" id="city-address" type="text" class="form-input-med" />
+            
             <!--State Input-->
             <label class="label" for="state-select">State</label>
             <select class="input-select" id="state-select"></select>
             
+            <!--Zipcode Input-->
+            <label class="label" for="zip-address">Zip Code</label>
+            <input name="zip-address" id="zip-address" type="text" class="form-input-short" />
             <div class="m-3">
+
             <!--Submit Button-->
             <button type="submit" id="btnSubmit" class="button is-primary rounded"> Submit
             </button>
@@ -62,7 +67,6 @@
           </div>
 
     </section>
-
     
     <section class="historic-container column-is-narrow is-align-content-center has-background-primary-light p-4 m-4 is-hidden">
       <H2 class="has-text-weight-medium is-size-4-tablet ">

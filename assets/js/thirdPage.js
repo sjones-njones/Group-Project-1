@@ -3,12 +3,7 @@ var i = 0;
 
 var sentPriceHouse = localStorage.getItem("randomHouses");
 sentPriceHouse = JSON.parse(sentPriceHouse);
-
   
-      console.log(sentPriceHouse);
-      console.log(sentPriceHouse[i]);
-
-
     function showResultsPrice() { 
       console.log(sentPriceHouse[i]);
 
