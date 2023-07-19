@@ -86,9 +86,8 @@ function bitcoinUser(bitcoinInputEl, randomAddress) {
       })
       .then(function (data) {
         console.log(data);
+        if (bitcoinInputEl >= 1){
         var priceArray = [];
-
-        if (randomAddress){
         for (let i = 0; i < data.props.length; i++) {
           var cart = {
             bitCoinInput: bitcoinInputEl,
@@ -98,18 +97,22 @@ function bitcoinUser(bitcoinInputEl, randomAddress) {
             bcPrice: (data.props[i].price) / rateEl,
             imgSrc: data.props[i].imgSrc
           };
+          priceArray.push(cart);
         } 
-      } else if (data.props.address = null){
+      } else if (bitcoinInputEl <= 1 ){
+        var priceArray = [];
+        for (let i = 0; i < 1; i++) {
           var cart = {
             bitCoinInput: bitcoinInputEl,
-            address: " where address is",
-            zipCode: " where zip is",
-            price: "price",
-            bcPrice: "00.000",
-            imgSrc: "the image"
-        }
+            address: " [address] ",
+            zipCode: "  [zip] ",
+            price: " [price] ",
+            bcPrice: (data.props[1].price - data.props[1].price),
+            imgSrc: "./assets/images/jamie-attfield-l306sgjOZtw-unsplash.jpg"
+          };
           priceArray.push(cart);
         }
+      }
         console.log(priceArray);
         localStorage.setItem("randomHouses", JSON.stringify(priceArray));
         document.location.replace("./thirdPage.html");
