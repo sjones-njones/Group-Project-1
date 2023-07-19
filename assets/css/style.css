@@ -1,9 +1,19 @@
 select {
   height: 24px;
+  width: 160px;
 }
 
 .bcInput {
   width: 60px;
+}
+
+.button {
+  max-width: 260px;
+  overflow-wrap: normal;
+  white-space: normal;
+  height: 100%;
+  
+  
 }
 
 .rounded {
@@ -29,6 +39,8 @@ height: auto;
   background-color: lightgray;
   border-radius: 0.25em;
   color: black;
-  opacity: 0.95;
+  opacity: 0.85;
   padding: 1em;
+  height: 100%;
 }
+

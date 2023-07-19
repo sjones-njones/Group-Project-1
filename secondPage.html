@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="has-background-grey-lighter" lang="en">
+<html class="bg-img" lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -11,29 +11,30 @@
   <title>House Value</title>
 </head>
 
-<body class="mt-5 container has-background-light has-text-centered">
+<body class="mt-5 container is-align-content-center has-text-centered">
   <header class="m-3">
     <h3 class="has-text-weight-semibold is-size-2-tablet">
-      Your House is worth 
+      Your House is worth
       <span class="bitcoinValue"></span>
-      
+
     </h3>
   </header>
+  <div class="columns is-centered">
+    <main class="column is-narrow bulma-overlay-mixin p-4 m-4">
+      <!-- house scr will be added dynamically to img with search -->
+      <div class="m-3 p-3">
+        <img id="picture" src="" alt="Picture of user's house" width="475" height="315">
+        <h3 class="address"></h3>
+      </div>
+    </main>
+  </div>
 
-  <main class="container has-background-primary-light is-align-content-center p-4 m-4">
-    <!-- house scr will be added dynamically to img with search -->
-    <div class="m-3 p-3">
-      <img id="picture" src="" alt="Picture of user's house" width="475" height="315">
-      <h3 class="address"></h3>
-    </div>
-  </main>
-
-  <button class="button is-primary" id="homeBtn">
+  <button class="button is-link" id="homeBtn">
     Go Back
   </button>
 
   <footer>
-    <H4>Produced by group-6 aka the Wolves of Website <!---Insert group name here --></H4>
+    <H4 class="has-text-white-ter">Produced by group-6 aka the Wolves of Website</H4>
   </footer>
 
   <!--linked jquery-->
