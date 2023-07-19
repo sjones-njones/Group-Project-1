@@ -95,7 +95,7 @@ $(function () {
         var priceArray = [];
         for (let i = 0; i < data.props.length; i++) {
           var cart = {
-            bitCoinInput: bitcoinInputEl,
+            bitCoinInput: $("#bitcoin-input").val().trim(),
             address: data.props[i].address,
             zipCode:  data.props[i].zpid,
             price: data.props[i].price,
