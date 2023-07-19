@@ -9,14 +9,14 @@ sentPriceHouse = JSON.parse(sentPriceHouse);
       console.log(sentPriceHouse[i]);
 
     function showResultsPrice() { 
-
+      
       document.getElementById('inputRangeEl').textContent = "This is the BitCoin you have " + sentPriceHouse.bitCoinInput;
 
       document.getElementById('imageEl').src = sentPriceHouse[i].imgSrc;
 
       document.getElementById('addressEl').textContent =  sentPriceHouse[i].address + " " + sentPriceHouse[i].zipCode;
 
-      document.getElementById('priceEl').textContent = "This is worth $" + sentPriceHouse[i].price + " and coverted to BitCoin is " + sentPriceHouse[i].bcPrice.toFixed(2);
+      document.getElementById('priceEl').textContent = "This is worth $" + sentPriceHouse[i].price + " and coverted to " + sentPriceHouse[i].currencyChoice +" is " + sentPriceHouse[i].bcPrice.toFixed(2);
 
       if (i < sentPriceHouse.length - 1){
         i++;
