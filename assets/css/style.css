@@ -6,18 +6,29 @@ select {
   width: 60px;
 }
 
+.rounded {
+  border-radius: 15px;
+}
+
 .bg-img { 
-  background-image: url(demo.jpg) ;
+  background-image: url("../images/iStock-930889470-2.jpg");
   background-position: center center;
   background-repeat:  no-repeat;
   background-attachment: fixed;
   background-size:  cover;
-  background-color: #999;
-
+  
 }
 
 .img-responsive {
 display: block; 
 max-width: 100%;
 height: auto;
+}
+
+.bulma-overlay-mixin {
+  background-color: lightgray;
+  border-radius: 0.25em;
+  color: black;
+  opacity: 0.95;
+  padding: 1em;
 }
