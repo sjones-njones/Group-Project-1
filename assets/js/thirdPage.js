@@ -3,38 +3,37 @@ var i = 0;
 
 var sentPriceHouse = localStorage.getItem("randomHouses");
 sentPriceHouse = JSON.parse(sentPriceHouse);
-  
-    function showResultsPrice() { 
-      console.log(sentPriceHouse[i]);
 
-      document.getElementById('inputRangeEl').textContent = "You have " + sentPriceHouse[i].bitCoinInput;
+function showResultsPrice() {
+  console.log(sentPriceHouse[i]);
 
-      document.getElementById('imageEl').src = sentPriceHouse[i].imgSrc;
+  document.getElementById('inputRangeEl').textContent = "You have " + sentPriceHouse[i].bitCoinInput;
 
-     document.getElementById('addressEl').textContent =  sentPriceHouse[i].address;
+  document.getElementById('imageEl').src = sentPriceHouse[i].imgSrc;
 
-     document.getElementById('priceEl').textContent = "House Value: $" + sentPriceHouse[i].price + " = " + sentPriceHouse[i].bcPrice;
+  document.getElementById('addressEl').textContent = sentPriceHouse[i].address;
 
-      if (i < sentPriceHouse.length - 1){
-        i++;
-      } else {
-        i = 0;
-      }
+  document.getElementById('priceEl').textContent = "House Value: $" + new Intl.NumberFormat('en-US').format(sentPriceHouse[i].price)
+    + " = " + sentPriceHouse[i].bcPrice;
+};
+if (i < sentPriceHouse.length - 1) {
+  i++;
+} else {
+  i = 0;
+}
 
-    }
-    showResultsPrice();
+showResultsPrice();
 
-    var tryAgain = document.querySelector('#tryAgainBtn');
-    tryAgain.addEventListener("click", showResultsPrice);
+var tryAgain = document.querySelector('#tryAgainBtn');
+tryAgain.addEventListener("click", showResultsPrice);
 
 
-    var goBackHomeBtn = document.querySelector('#homeBtn');
+var goBackHomeBtn = document.querySelector('#homeBtn');
 
-    goBackHomeBtn.addEventListener("click", clearStorage);
+goBackHomeBtn.addEventListener("click", clearStorage);
 
-    function clearStorage(){
-      document.location.replace("./index.html");
-      localStorage.removeItem("randomHouses");
-    }
-   
-  
+function clearStorage() {
+  document.location.replace("./index.html");
+  localStorage.removeItem("randomHouses");
+}
+

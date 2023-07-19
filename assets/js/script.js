@@ -10,7 +10,7 @@ $(function () {
   function getBitcoinVal(zestimateEl, housepicEl, addressSite, currencyCode) {
     console.log(currencyCode);
     fetch("https://rest.coinapi.io/v1/exchangerate/" + currencyCode + "/USD", {
-      headers: { 'X-CoinAPI-Key': '406DA5B8-4FA9-4947-81FE-5A06619B3BB3' }
+      headers: { 'X-CoinAPI-Key': '1f6475e0-9d2b-4378-90f9-594bcbb9fb22' }
     })
       .then(function (response) {
         return response.json()
@@ -42,7 +42,7 @@ $(function () {
   //  uses bitcoin api to define parameters for amount user can spend
   function bitcoinUser(bitcoinInputEl, randomAddress, currencyCodeRandom, currencyInput, currencySelectRandom) {
     fetch("https://rest.coinapi.io/v1/exchangerate/" + currencyCodeRandom + "/USD", {
-      headers: { 'X-CoinAPI-Key': '406DA5B8-4FA9-4947-81FE-5A06619B3BB3' }
+      headers: { 'X-CoinAPI-Key': 'BE43FC60-CAE6-4647-AFC6-8E0B75A70954' }
     })
       .then(function (response) {
         return response.json()
@@ -102,7 +102,6 @@ $(function () {
             forSale: data.props[i].listingStatus,
             imgSrc: data.props[i].imgSrc
           };
-// console.log(cart);
           priceArray.push(cart);
         }
         localStorage.setItem("randomHouses", JSON.stringify(priceArray));
@@ -134,7 +133,7 @@ $(function () {
   function saveLastAddress(addressAndCurrency) {
     if (!searchedAddressArray.includes(addressAndCurrency)) {
       searchedAddressArray.unshift(addressAndCurrency);
-      if (searchedAddressArray.length > 3) {
+      if (searchedAddressArray.length > 6) {
         searchedAddressArray.pop();
       }
       localStorage.setItem("myAddress", JSON.stringify(searchedAddressArray));
@@ -152,7 +151,7 @@ $(function () {
       for (var i = 0; i < storedAddresses.length; i++) {
         var button = document.createElement("button");
         $(button).text(storedAddresses[i].address + ", " + storedAddresses[i].currency);
-        $(button).addClass(" button is-link rounded m-1 p-2");
+        $(button).addClass("button is-link m-1 is-fullwidth p-2");
         $(addressContainer).append(button);
       }
     }
