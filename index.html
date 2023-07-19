@@ -10,7 +10,7 @@
   <!--linked bulma-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="./assets/css/style.css" />
-  
+
 
   <!--Placeholder link for display page-->
   <!--Placeholder link for second display page-->
@@ -27,88 +27,97 @@
   </header>
 
   <main class="mt-3 columns is-centered">
-    <section id="address-search-container"
-      class="column-is-one-quarter bulma-overlay-mixin is-align-content-center p-4 m-4 rounded">
+    <section id="address-container" class="search-container column is-one-quarter is-align-content-center p-4 m-4">
 
-            <!--Search by address is below-->
-            <h2 class="has-text-weight-medium  is-size-4-tablet">Input an address below</h2>
-                  
-            <!--Street Adress Input -->
-            <label class="label" for="street-address">Street Address</label>
-            <input name="street-address" id="street-address" type="text"/>
-            
-            <!--Apt Number Input-->
-            <label class="label" for="Apt">Apt</label>
-            <input name="apt-number" id="apt-number" type="text"/>
-          
-            <!--City Input-->
-            <label class="label" for="city-address">City</label>
-            <input name="city-address" id="city-address" type="text"/>
-          
-            <!--State Input-->
-            <label class="label" for="state-select">State</label>
-            <select class="input-select" id="state-select"></select>
-          
-            <!--Zipcode Input-->
-            <label class="label" for="zip-address">Zip Code</label>
-            <input name="zip-address" id="zip-address" type="text"/>
+      <Div class="bulma-overlay-mixin">
+        <!--Search by address is below-->
+        <h2 class="has-text-weight-medium  is-size-4-tablet">Input an address below</h2>
 
-            <!-- Currency Input--> 
-            <label class="label" for="currency-select">Cryptocurrencies</label>
-            <select class="input-select" id="currency-select"></select>
-          
-          <div class="m-3">
-            <!--Submit Button-->
-            <button type="submit" id="btnSubmit" class="button is-primary"> Submit
-            </button>
-          </div>
+        <!--Street Adress Input -->
+        <label class="mt-5 label" for="street-address">Street Address</label>
+        <input name="street-address" id="street-address" type="text" />
 
+        <!--Apt Number Input-->
+        <label class="label" for="Apt">Apt</label>
+        <input name="apt-number" id="apt-number" type="text" />
+
+        <!--City Input-->
+        <label class="label" for="city-address">City</label>
+        <input name="city-address" id="city-address" type="text" />
+
+        <!--State Input-->
+        <label class="label" for="state-select">State</label>
+        <select class="input-select" id="state-select"></select>
+
+        <!--Zipcode Input-->
+        <label class="label" for="zip-address">Zip Code</label>
+        <input name="zip-address" id="zip-address" type="text" />
+
+        <!-- Currency Input-->
+        <label class="label" for="currency-select">Cryptocurrencies</label>
+        <select class="input-select" id="currency-select"></select>
+      </Div>
+
+      <div class="m-3">
+        <!--Submit Button-->
+        <button type="submit" id="btnSubmit" class="button is-link"> Submit
+        </button>
+      </div>
 
 
     </section>
-    
-    <section class="historic-container column-is-narrow is-align-content-center bulma-overlay-mixin p-4 m-4 is-hidden">
+
+
+
+    <section class="historic-container column is-narrow is-align-content-center p-4 m-4 is-hidden">
+      <div class="bulma-overlay-mixin">
       <H2 class="has-text-weight-medium is-size-4-tablet ">
         Previous Searches
       </H2>
-    <!--Empty div container for historic searchs-->
-        <div id="previous-search-container">
-      
-      
-        </div>
+      <!--Empty div container for historic searchs-->
+      <div class="mt-4" id="previous-search-container">
+
+
+      </div>
+      </div>
     </section>
 
-    
 
 
-    <section id="random-search-container" class="is-align-content-center bulma-overlay-mixin p-4 m-4">
-      <H2 class="has-text-weight-medium is-size-4-tablet">I have <input name="bitcoin-input" id="bitcoin-input"
-          type="number" class="form-input-xshort bcInput">
-          
-          <!-- Currency Input--> 
+
+    <section id="random-container" class="search-container column is-one-quarter p-4 m-4">
+      <div class="bulma-overlay-mixin">
+        <H2 class="has-text-weight-medium is-size-4-tablet">I have <input name="bitcoin-input" id="bitcoin-input"
+            type="number" class="form-input-xshort bcInput">
+
+          <!-- Currency Input-->
           <label class="label" for="currency-select"></label>
           <select class="input-select" id="currency-select-random"></select>
-          
+
           <br>
-        show me a house I can buy.</H2>
+          show me a house
+          <br>
+          I can buy.
+        </H2>
 
-            <!--Random return based on bitcoin value below-->
-            <p class="has-text-weight-normal is-size-5-tablet">Optional Inputs</p>
+        <!--Random return based on bitcoin value below-->
+        <p class="has-text-weight-normal is-size-5-tablet">Optional Inputs</p>
 
-            <!--City input for random return-->
-            <label class="label" for="city-random">City</label>
-            <input name="city-random" id="city-random" type="text" class="form-input-med" />
-          
-            <!--State input for random return-->
-            <label class="label" for="state-random">State</label>
-            <select id="random-select">
-            </select>
-            
-            <div class="m-3"></div>
-            <!--Submit Button for random return-->
-            <button id="btnRandomSubmit" type="submit" class="button is-primary rounded"> Find a house!
-            </button>
-            </div>
+        <!--City input for random return-->
+        <label class="label" for="city-random">City</label>
+        <input name="city-random" id="city-random" type="text" />
+
+        <!--State input for random return-->
+        <label class="label" for="state-random">State</label>
+        <select id="random-select">
+        </select>
+      </div>
+
+      <div class="m-3">
+      <!--Submit Button for random return-->
+      <button id="btnRandomSubmit" type="submit" class="button is-link"> Find a house!
+      </button>
+      </div>
 
     </section>
 
@@ -131,4 +140,3 @@
 
 
 </html>
-

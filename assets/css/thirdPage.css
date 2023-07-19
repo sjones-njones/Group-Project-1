@@ -1,3 +1,23 @@
 img {
     border-radius: 10px;
 }
+
+.bg-img { 
+    background-image: url("../images/iStock-930889470-2.jpg");
+    background-position: center center;
+    background-repeat:  no-repeat;
+    background-attachment: fixed;
+    background-size:  cover;
+    
+  }
+
+  .bulma-overlay-mixin {
+    background-color: lightgray;
+    border-radius: 0.25em;
+    color: black;
+    opacity: 1;
+    padding: 1em;
+    height: 100%;
+    align-items: center;
+    max-width: fit-content;
+  }
