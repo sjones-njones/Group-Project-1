@@ -111,7 +111,10 @@ var unit = " Bitcoin";
     var addressEl = streetEl + aptEl + " " + cityEl + " " + stateEl + " " + zipEl;
     var currencySelect = $("#currency-select").val().trim();
     console.log(currencySelect);
-    var addressAndCurrency = addressEl + " " +  currencySelect;
+    var addressAndCurrency = {
+      address: addressEl,
+      currency: currencySelect
+    }
     console.log (addressAndCurrency);
     useAddress(addressEl, currencySelect);
     saveLastAddress(addressAndCurrency);
@@ -137,7 +140,7 @@ var unit = " Bitcoin";
       $(addressContainer).text("");
       for (var i = 0; i < storedAddresses.length; i++) {
         var button = document.createElement("button");
-        $(button).text(storedAddresses[i]);
+        $(button).text(storedAddresses[i].address + ", " + storedAddresses[i].currency);
         $(button).addClass(" button is-primary rounded m-1 p-2");
         $(addressContainer).append(button);
       }
@@ -146,15 +149,25 @@ var unit = " Bitcoin";
       return;
     }
   }
-
-  var addressEl;
+var addressEl;
+var addressAndCurrency;
+var currencySelect;
   // gives previous searched address buttons functionality
   function handleButtons(event) {
     var btnClicked = $(event.target);
     var contents = btnClicked[0].textContent;
+    var comma = ",";
     console.log(contents);
-    $(addressEl).text(contents);
-    useAddress(contents);
+    console.log(typeof contents);
+    const contentsArray = contents.split(comma);
+console.log(contentsArray);
+    $(addressEl).text(contentsArray[0]);
+    $(currencySelect).text(contentsArray[1]);
+    var addressString = contentsArray[0].toString().trim();
+    var currencyString = contentsArray[1].toString().trim();
+    console.log(currencyString);
+    console.log(addressString);
+    useAddress(addressString, currencyString);
   }
 
   // uses user address to get zpid
