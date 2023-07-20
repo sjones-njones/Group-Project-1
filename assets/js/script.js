@@ -108,6 +108,15 @@ $(function () {
 
   //sets parameters for house search  
   function locationSearch(randomAddress, maxPrice, rateEl, bitcoinInputEl, currencyInput, currencySelectRandom) {
+    var priceArray = []; 
+
+    console.log(maxPrice);
+    
+    if (maxPrice < 10) {
+      localStorage.setItem("randomHouses", JSON.stringify(priceArray));
+      document.location.replace("./thirdPage.html");
+
+     } else {
     const url = 'https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=' + randomAddress + '&home_type=Houses&sort=Price_High_Low&maxPrice=' + maxPrice;
     fetch(url, {
       headers: {
@@ -121,7 +130,6 @@ $(function () {
           return response.json()
 
             .then(function (data) {
-              var priceArray = [];
               for (let i = 0; i < data.props.length; i++) {
                 var cart = {
                   bitCoinInput: currencyInput,
@@ -148,7 +156,7 @@ $(function () {
 
       });
 
-  }
+  }};
 
   // gets user input for address
   var formSubmitHandler = function (event) {

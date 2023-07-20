@@ -10,7 +10,7 @@ function showResultsPrice() {
 
   var sentPriceHouse = JSON.parse(localStorage.getItem("randomHouses"));
 
-  if (sentPriceHouse == null) {
+  if (sentPriceHouse.length == 0) {
 
     document.getElementById('inputRangeEl').textContent = "OOF we we're not able to find any houses meeting your budget";
     document.getElementById('imageEl').src = "./assets/images/piggy.jpg";
