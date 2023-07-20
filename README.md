@@ -10,7 +10,7 @@ Alternatively, the site enables users to search for homes less than a current Bi
 ![Site Mockup](./assets/images/image.png)
 
 ## Link 
-https://sjones-njones.github.io/group-project-1
+https://sjones-njones.github.io/Group-Project-1/index.html 
 
 ## Credits 
 This site was produced by Group 6 with individual credits to 
