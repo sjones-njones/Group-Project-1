@@ -17,7 +17,7 @@ $(function () {
     $(".address").text(addressString);
   }
 
-// click event and function call
+// click event and function
   getItems();
   $("#homeBtn").on("click", goHome);
 });
