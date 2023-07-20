@@ -133,7 +133,7 @@ $(function () {
   function saveLastAddress(addressAndCurrency) {
     if (!searchedAddressArray.includes(addressAndCurrency)) {
       searchedAddressArray.unshift(addressAndCurrency);
-      if (searchedAddressArray.length > 6) {
+      if (searchedAddressArray.length > 3) {
         searchedAddressArray.pop();
       }
       localStorage.setItem("myAddress", JSON.stringify(searchedAddressArray));
@@ -151,7 +151,7 @@ $(function () {
       for (var i = 0; i < storedAddresses.length; i++) {
         var button = document.createElement("button");
         $(button).text(storedAddresses[i].address + ", " + storedAddresses[i].currency);
-        $(button).addClass("button is-link m-1 is-fullwidth p-2");
+        $(button).addClass("button  is-link m-4");
         $(addressContainer).append(button);
       }
     }
