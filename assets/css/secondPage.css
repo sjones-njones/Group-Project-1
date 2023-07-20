@@ -20,3 +20,8 @@ img {
     height: 100%;
     align-items: center;
   }
+
+  h1 {
+    color: white;
+    -webkit-text-stroke: black 1px;
+  }

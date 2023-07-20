@@ -16,18 +16,20 @@
   <!--Placeholder link for second display page-->
 
 
-  <title>Bitcoin to House Converter</title>
+  <title>Crypto to House Converter</title>
 </head>
 
-<body class="mt-5 has-text-centered">
+<body class="mt-2 has-text-centered">
 
-  <header class="p-5 m-5">
-    <H1 class="has-text-black has-text-weight-semibold  is-size-2-tablet">How many Bitcoin is your house worth?</H1>
+  <header>
+    <H1 class="is-size-2-tablet has-text-weight-semibold">Buy a House with Pure Speculation!</H1>
 
   </header>
 
   <main class="mt-3 columns is-centered">
-    <section id="address-container" class="search-container column is-one-quarter is-align-content-center p-4 m-4">
+    <div class="column">
+    </div>
+    <section id="address-container" class="search-container column is-one-third is-align-content-center p-4 m-4">
 
       <Div class="bulma-overlay-mixin">
         <!--Search by address is below-->
@@ -56,11 +58,9 @@
         <!-- Currency Input-->
         <label class="label" for="currency-select">Cryptocurrencies</label>
         <select class="input-select" id="currency-select"></select>
-      </Div>
-
-      <div class="m-3">
+        <br>
         <!--Submit Button-->
-        <button type="submit" id="btnSubmit" class="button is-link"> Submit
+        <button type="submit" id="btnSubmit" class="mt-4 button is-link"> Submit
         </button>
       </div>
 
@@ -69,16 +69,14 @@
 
 
 
-    <section class="historic-container column is-narrow is-align-content-center p-4 m-4 is-hidden">
+    <section class="historic-container is-justify-content-center p-4 m-4 is-hidden column is-one-quarter">
       <div class="bulma-overlay-mixin">
-      <H2 class="has-text-weight-medium is-size-4-tablet ">
-        Previous Searches
-      </H2>
-      <!--Empty div container for historic searchs-->
-      <div class="mt-4" id="previous-search-container">
-
-
-      </div>
+        <H2 class="has-text-weight-medium is-size-4-tablet ">
+          Previous Searches
+        </H2>
+        <!--Empty div container for historic searchs-->
+        <div class="buttons is-centered mt-4 pt-4" id="previous-search-container">
+        </div>
       </div>
     </section>
 
@@ -93,7 +91,6 @@
           <!-- Currency Input-->
           <label class="label" for="currency-select"></label>
           <select class="input-select" id="currency-select-random"></select>
-
           <br>
           show me a house
           <br>
@@ -112,15 +109,14 @@
         <select class="input-select" id="state-select-random">
 
         </select>
+        <br>
+        <!--Submit Button for random return-->
+        <button id="btnRandomSubmit" type="submit" class="mt-4 button is-link"> Find a house!
+        </button>
       </div>
-
-      <div class="m-3">
-      <!--Submit Button for random return-->
-      <button id="btnRandomSubmit" type="submit" class="button is-link"> Find a house!
-      </button>
-      </div>
-
     </section>
+    <div class="column">
+    </div>
 
   </main>
 

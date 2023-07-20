@@ -8,18 +8,12 @@ select {
 }
 
 .button {
-  max-width: 260px;
-  overflow-wrap: normal;
+  width: fit-content !important;
+  max-width: 80%;
+  word-wrap: normal;
   white-space: normal;
-  height: 100%;
-  
-  
+  height: max-content !important;
 }
-
-.rounded {
-  border-radius: 15px;
-}
-
 .bg-img { 
   background-image: url("../images/iStock-930889470-2.jpg");
   background-position: center center;
@@ -44,3 +38,7 @@ height: auto;
   height: 100%;
 }
 
+h1 {
+  color: white;
+  -webkit-text-stroke: black 1px;
+}
