@@ -55,13 +55,11 @@ h1 {
   background-color: rgba(0,0,0,0.4); 
 }
 
-
 .modal-content {
   margin: 15% auto; 
   padding: 20px;
   width: 80%; 
 }
-
 
 .modalClose {
   color: #aaa;

@@ -5,6 +5,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
   <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
   <!--linked bulma-->
@@ -29,7 +30,7 @@
   <main class="mt-3 columns is-centered">
     <div class="column">
     </div>
-    <section id="address-container" class="search-container column is-one-third is-align-content-center p-4 m-4">
+    <section id="address-container" class="search-container column is-one-third-tablet is-one-quarter-desktop is-align-content-center p-4 m-4">
 
       <Div class="bulma-overlay-mixin">
         <!--Search by address is below-->
@@ -40,7 +41,7 @@
         <input name="street-address" id="street-address" type="text" autocomplete="on" />
 
         <!--Apt Number Input-->
-        <label class="label" for="Apt">Apt</label>
+        <label class="label" for="apt-number">Apt</label>
         <input name="Apt" id="apt-number" type="text" />
 
         <!--City Input-->
@@ -69,7 +70,7 @@
 
 
 
-    <section class="historic-container is-justify-content-center p-4 m-4 is-hidden column is-one-quarter">
+    <section class="historic-container is-justify-content-center p-4 m-4 is-hidden column is-one-quarter-tablet">
       <div class="bulma-overlay-mixin">
         <H2 class="has-text-weight-medium is-size-4-tablet ">
           Previous Searches
@@ -83,7 +84,7 @@
 
 
 
-    <section id="random-container" class="search-container column is-one-quarter p-4 m-4">
+    <section id="random-container" class="search-container column is-one-third-tablet is-one-quarter-desktop p-4 m-4">
       <div class="bulma-overlay-mixin">
         <H2 class="has-text-weight-medium is-size-4-tablet">I have <input name="bitcoin-input" id="bitcoin-input"
             type="number" class="form-input-xshort bcInput">
@@ -120,8 +121,8 @@
 
   </main>
 
-  <footer>
-    <H4 class="has-text-white-ter">Produced by group-6 aka the Wolves of Website</H4>
+  <footer class="mt-5 pt-5">
+    <H4 class="has-text-white-ter mt-5 pt-5">Produced by group-6 aka the Wolves of Website</H4>
   </footer>
 
   <!-- mnh  -->

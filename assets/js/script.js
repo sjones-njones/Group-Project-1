@@ -111,6 +111,7 @@ $(function () {
     const url = 'https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=' + randomAddress + '&home_type=Houses&sort=Price_High_Low&maxPrice=' + maxPrice;
     fetch(url, {
       headers: {
+        'Access-Control-Allow-Origin': 'https://sjones-njones.github.io',
         'X-RapidAPI-Key': '0e88e3b544msh53627318f7da7a0p18e841jsn5dd8f250f5f6',
         'X-RapidAPI-Host': 'zillow-com1.p.rapidapi.com'
       }
@@ -214,6 +215,7 @@ $(function () {
   function useAddress(addressVariable, currencySelect) {
     fetch('https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=' + addressVariable + '&home_type=Houses?per_page=100&page=1', {
       headers: {
+        'Access-Control-Allow-Origin': 'https://sjones-njones.github.io',
         'X-RapidAPI-Key': '0e88e3b544msh53627318f7da7a0p18e841jsn5dd8f250f5f6',
         'X-RapidAPI-Host': 'zillow-com1.p.rapidapi.com'
       }
@@ -243,6 +245,7 @@ $(function () {
   function getValue(zpidEl, currencySelect) {
     fetch('https://zillow-com1.p.rapidapi.com/property?zpid=' + zpidEl, {
       headers: {
+        'Access-Control-Allow-Origin': 'https://sjones-njones.github.io',
         'X-RapidAPI-Key': '0e88e3b544msh53627318f7da7a0p18e841jsn5dd8f250f5f6',
         'X-RapidAPI-Host': 'zillow-com1.p.rapidapi.com'
       }
