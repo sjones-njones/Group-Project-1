@@ -19,7 +19,7 @@ $(function () {
   // finds current bc value and uses it to convert house value to bitcoin 
   function getBitcoinVal(zestimateEl, housepicEl, addressSite, currencyCode) {
     fetch("https://rest.coinapi.io/v1/exchangerate/" + currencyCode + "/USD", {
-      headers: { 'X-CoinAPI-Key': '1f6475e0-9d2b-4378-90f9-594bcbb9fb22' }
+      headers: { 'X-CoinAPI-Key': '3451CF48-8278-4C0F-B820-A91C2043A14E' }
     })
       .then(function (response) {
         if (response.ok) {
@@ -63,7 +63,7 @@ $(function () {
   //  uses bitcoin api to define parameters for amount user can spend
   function bitcoinUser(bitcoinInputEl, randomAddress, currencyCodeRandom, currencyInput, currencySelectRandom) {
     fetch("https://rest.coinapi.io/v1/exchangerate/" + currencyCodeRandom + "/USD", {
-      headers: { 'X-CoinAPI-Key': 'BE43FC60-CAE6-4647-AFC6-8E0B75A70954' }
+      headers: { 'X-CoinAPI-Key': '3451CF48-8278-4C0F-B820-A91C2043A14E' }
     })
 
       .then(function (response) {
