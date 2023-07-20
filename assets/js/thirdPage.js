@@ -1,20 +1,22 @@
+// Modal Define 
+var modalEl = $(".modal");
+var modalTxtEl = $(".message-body");
+var modalClose = $(".modal-close");
+
 
 var i = 0
 
 function showResultsPrice() {
 
+  var sentPriceHouse = JSON.parse(localStorage.getItem("randomHouses"));
+
   if (sentPriceHouse == null) {
-   
+
     document.getElementById('inputRangeEl').textContent = "OOF we we're not able to find any houses meeting your budget";
     document.getElementById('imageEl').src = "./assets/images/piggy.jpg";
     document.getElementById('addressEl').textContent = "Give it another try below!"
 
   } else {
-
-    var sentPriceHouse = JSON.parse(localStorage.getItem("randomHouses"));
-
-    console.log(sentPriceHouse[i]);
-    console.log(sentPriceHouse.length);
 
     document.getElementById('inputRangeEl').textContent = "You have " + sentPriceHouse[i].bitCoinInput;
 

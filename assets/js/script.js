@@ -9,6 +9,11 @@ $(function () {
   var addressAndCurrency;
   var currencySelect;
 
+  // Modal Define 
+  var modalEl = $(".modal");
+  var modalTxtEl = $(".message-body");
+  var modalClose = $(".modal-close");
+
   var searchedAddressArray = JSON.parse(localStorage.getItem("myAddress")) || [];
 
   // finds current bc value and uses it to convert house value to bitcoin 
@@ -17,40 +22,68 @@ $(function () {
       headers: { 'X-CoinAPI-Key': '1f6475e0-9d2b-4378-90f9-594bcbb9fb22' }
     })
       .then(function (response) {
-        return response.json()
-      })
-      .then(function (data) {
-        var rateEl = data.rate.toFixed(2);
-        bcValue = (zestimateEl / rateEl).toFixed(0);
-        if (currencyCode === "BTC") {
-          var unit = " Bitcoin";
-        } else if (currencyCode === "ETH") {
-          var unit = " Ethereum";
+        if (response.ok) {
+          return response.json()
+
+
+            .then(function (data) {
+              var rateEl = data.rate.toFixed(2);
+              bcValue = (zestimateEl / rateEl).toFixed(0);
+              if (currencyCode === "BTC") {
+                var unit = " Bitcoin";
+              } else if (currencyCode === "ETH") {
+                var unit = " Ethereum";
+              } else {
+                var unit = " Dogecoin";
+              }
+              var myHouseObject = {
+                address: addressSite,
+                pic: housepicEl,
+                bitcoinHouseValue: new Intl.NumberFormat('en-US').format(bcValue) + unit
+              };
+              localStorage.setItem("myHouse", JSON.stringify(myHouseObject));
+              document.location.replace("./secondPage.html");
+            });
+
         } else {
-          var unit = " Dogecoin";
+          $(modalEl).addClass("is-active");
+          $(modalTxtEl).text("We're sorry, something went wrong!")
         }
-        var myHouseObject = {
-          address: addressSite,
-          pic: housepicEl,
-          bitcoinHouseValue: new Intl.NumberFormat('en-US').format(bcValue) + unit
-        };
-        localStorage.setItem("myHouse", JSON.stringify(myHouseObject));
-        document.location.replace("./secondPage.html");
+
+      })
+      .catch(function (error) {
+        $(modalClose).on('click', modalHandler);
+
       });
+
   }
+
+
 
   //  uses bitcoin api to define parameters for amount user can spend
   function bitcoinUser(bitcoinInputEl, randomAddress, currencyCodeRandom, currencyInput, currencySelectRandom) {
     fetch("https://rest.coinapi.io/v1/exchangerate/" + currencyCodeRandom + "/USD", {
       headers: { 'X-CoinAPI-Key': 'BE43FC60-CAE6-4647-AFC6-8E0B75A70954' }
     })
+
       .then(function (response) {
-        return response.json()
+        if (response.ok) {
+          return response.json()
+
+            .then(function (data) {
+              var rateEl = data.rate;
+              maxPrice = (bitcoinInputEl * rateEl).toFixed(0);
+              locationSearch(randomAddress, maxPrice, rateEl, bitcoinInputEl, currencyInput, currencySelectRandom);
+            });
+        } else {
+          $(modalEl).addClass("is-active");
+          $(modalTxtEl).text("We're sorry, something went wrong!")
+        }
+
       })
-      .then(function (data) {
-        var rateEl = data.rate;
-        maxPrice = (bitcoinInputEl * rateEl).toFixed(0);
-        locationSearch(randomAddress, maxPrice, rateEl, bitcoinInputEl, currencyInput, currencySelectRandom);
+      .catch(function (error) {
+        $(modalClose).on('click', modalHandler);
+
       });
   }
 
@@ -83,25 +116,37 @@ $(function () {
       }
     })
       .then(function (response) {
-        return response.json()
-      })
-      .then(function (data) {
-        var priceArray = [];
-        for (let i = 0; i < data.props.length; i++) {
-          var cart = {
-            bitCoinInput: currencyInput,
-            address: data.props[i].address,
-            zipCode: data.props[i].zpid,
-            price: data.props[i].price,
-            bcPrice: ((data.props[i].price) / rateEl).toFixed(2) + " " + currencySelectRandom,
-            forSale: data.props[i].listingStatus,
-            imgSrc: data.props[i].imgSrc
-          };
-          priceArray.push(cart);
+        if (response.ok) {
+          return response.json()
+
+            .then(function (data) {
+              var priceArray = [];
+              for (let i = 0; i < data.props.length; i++) {
+                var cart = {
+                  bitCoinInput: currencyInput,
+                  address: data.props[i].address,
+                  zipCode: data.props[i].zpid,
+                  price: data.props[i].price,
+                  bcPrice: ((data.props[i].price) / rateEl).toFixed(2) + " " + currencySelectRandom,
+                  forSale: data.props[i].listingStatus,
+                  imgSrc: data.props[i].imgSrc
+                };
+                priceArray.push(cart);
+              }
+              localStorage.setItem("randomHouses", JSON.stringify(priceArray));
+              document.location.replace("./thirdPage.html");
+            });
+        } else {
+          $(modalEl).addClass("is-active");
+          $(modalTxtEl).text("We're sorry, something went wrong!")
         }
-        localStorage.setItem("randomHouses", JSON.stringify(priceArray));
-        document.location.replace("./thirdPage.html");
+
+      })
+      .catch(function (error) {
+        $(modalClose).on('click', modalHandler);
+
       });
+
   }
 
   // gets user input for address
@@ -173,12 +218,24 @@ $(function () {
         'X-RapidAPI-Host': 'zillow-com1.p.rapidapi.com'
       }
     })
+
       .then(function (response) {
-        return response.json()
+        if (response.ok) {
+          return response.json()
+
+            .then(function (data) {
+              var zpidEl = data.zpid;
+              getValue(zpidEl, currencySelect);
+            });
+        } else {
+          $(modalEl).addClass("is-active");
+          $(modalTxtEl).text("We're sorry, something went wrong!")
+        }
+
       })
-      .then(function (data) {
-        var zpidEl = data.zpid;
-        getValue(zpidEl, currencySelect);
+      .catch(function (error) {
+        $(modalClose).on('click', modalHandler);
+
       });
   }
 
@@ -191,22 +248,37 @@ $(function () {
       }
     })
       .then(function (response) {
-        return response.json()
-      })
-      .then(function (data) {
-        var addressSite = data.address;
-        var housepicEl = data.imgSrc;
-        var zestimateEl = data.zestimate;
+        if (response.ok) {
+          return response.json()
 
-        if (currencySelect === "Bitcoin") {
-          var currencyCode = "BTC";
-        } else if (currencySelect === "Ethereum") {
-          var currencyCode = "ETH";
+            .then(function (data) {
+              var addressSite = data.address;
+              var housepicEl = data.imgSrc;
+              var zestimateEl = data.zestimate;
+
+              if (currencySelect === "Bitcoin") {
+                var currencyCode = "BTC";
+              } else if (currencySelect === "Ethereum") {
+                var currencyCode = "ETH";
+              } else {
+                var currencyCode = "DOGE";
+              }
+              getBitcoinVal(zestimateEl, housepicEl, addressSite, currencyCode);
+            });
         } else {
-          var currencyCode = "DOGE";
+          $(modalEl).addClass("is-active");
+          $(modalTxtEl).text("We're sorry, something went wrong!")
         }
-        getBitcoinVal(zestimateEl, housepicEl, addressSite, currencyCode);
+
+      })
+      .catch(function (error) {
+        $(modalClose).on('click', modalHandler);
+
       });
+  }
+
+  function modalHandler() {
+    $(modalEl).removeClass('is-active');
   }
 
   // for currency dropdown list
@@ -235,6 +307,7 @@ $(function () {
   }
 
   // submit button for address input
+  $(modalClose).on('click', modalHandler);
   $("#btnSubmit").on("click", formSubmitHandler);
   $("#btnRandomSubmit").on("click", formRandomSubmitHandler);
   $(addressContainer).on("click", "button", handleButtons);
