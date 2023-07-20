@@ -1,9 +1,11 @@
 $(function () {
 
+  // returns to home page
   function goHome() {
     document.location.replace("./index.html");
   }
 
+  // renders items to screen
   function getItems() {
     var myHouseEl = JSON.parse(localStorage.getItem("myHouse"));
     var bitcoinValueEl = $(".bitcoinValue");
@@ -15,7 +17,7 @@ $(function () {
     $(".address").text(addressString);
   }
 
-
+// click event and function call
   getItems();
   $("#homeBtn").on("click", goHome);
 });
