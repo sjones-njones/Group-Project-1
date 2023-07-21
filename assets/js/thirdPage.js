@@ -5,7 +5,6 @@ var modalClose = $(".modal-close");
 
 var tryAgain = document.querySelector('#tryAgainBtn');
 var goBackHomeBtn = document.querySelector('#homeBtn');
-var goBackHomeBtn = document.querySelector('#homeBtn');
 
 var i = 0
 
