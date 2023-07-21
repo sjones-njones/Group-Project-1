@@ -13,7 +13,8 @@ function showResultsPrice() {
 
   var sentPriceHouse = JSON.parse(localStorage.getItem("randomHouses"));
 
-  if (sentPriceHouse.length == 0) { //If a list cannot generate from a user input value, it will put out alternative text
+  //If a list cannot generate from a user input value, it will put out alternative text
+  if (sentPriceHouse.length == 0) { 
 
     document.getElementById('inputRangeEl').textContent = "OOF we we're not able to find any houses meeting your budget";
     document.getElementById('imageEl').src = "./assets/images/piggy.jpg";
@@ -30,7 +31,8 @@ function showResultsPrice() {
     document.getElementById('priceEl').textContent = "House Value: $" + new Intl.NumberFormat('en-US').format(sentPriceHouse[i].price)
       + " = " + sentPriceHouse[i].bcPrice;
 
-    if (i < sentPriceHouse.length - 1) { // Instead of a for loop, the tryAgian button will add to i movig to the next item in the list
+      // Instead of a for loop, the tryAgain button will add to i, moving to the next item in the list
+    if (i < sentPriceHouse.length - 1) { 
       i++;
     } else {
       i = 0;
@@ -42,7 +44,11 @@ showResultsPrice();
 
 tryAgain.addEventListener("click", showResultsPrice);
 
-goBackHomeBtn.addEventListener("click", clearStorage); // going back to the home will also clear the storage generated
+
+var goBackHomeBtn = document.querySelector('#homeBtn');
+
+// going back to the home will also clear the storage generated
+goBackHomeBtn.addEventListener("click", clearStorage); 
 
 function clearStorage() {
   document.location.replace("./index.html");
