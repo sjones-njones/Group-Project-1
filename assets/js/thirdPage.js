@@ -4,7 +4,7 @@ var modalTxtEl = $(".message-body");
 var modalClose = $(".modal-close");
 
 var tryAgain = document.querySelector('#tryAgainBtn');
-
+var goBackHomeBtn = document.querySelector('#homeBtn');
 var goBackHomeBtn = document.querySelector('#homeBtn');
 
 var i = 0
@@ -40,22 +40,13 @@ function showResultsPrice() {
   }
 };
 
-showResultsPrice();
-
-tryAgain.addEventListener("click", showResultsPrice);
-
-
-var goBackHomeBtn = document.querySelector('#homeBtn');
-
-// going back to the home will also clear the storage generated
-goBackHomeBtn.addEventListener("click", clearStorage); 
-
 function clearStorage() {
   document.location.replace("./index.html");
   localStorage.removeItem("randomHouses");
 }
 
-
-showResultsPrice(); //home and list click through list button
+//home and list click through list button
+showResultsPrice(); 
 tryAgain.addEventListener("click", showResultsPrice);
+// going back to the home will also clear the storage generated
 goBackHomeBtn.addEventListener("click", clearStorage);
