@@ -3,6 +3,9 @@ var modalEl = $(".modal");
 var modalTxtEl = $(".message-body");
 var modalClose = $(".modal-close");
 
+var tryAgain = document.querySelector('#tryAgainBtn');
+
+var goBackHomeBtn = document.querySelector('#homeBtn');
 
 var i = 0
 
@@ -37,12 +40,7 @@ function showResultsPrice() {
 
 showResultsPrice();
 
-var tryAgain = document.querySelector('#tryAgainBtn');
-
 tryAgain.addEventListener("click", showResultsPrice);
-
-
-var goBackHomeBtn = document.querySelector('#homeBtn');
 
 goBackHomeBtn.addEventListener("click", clearStorage); // going back to the home will also clear the storage generated
 
@@ -52,6 +50,6 @@ function clearStorage() {
 }
 
 
-showResultsPrice();
+showResultsPrice(); //home and list click through list button
 tryAgain.addEventListener("click", showResultsPrice);
 goBackHomeBtn.addEventListener("click", clearStorage);
